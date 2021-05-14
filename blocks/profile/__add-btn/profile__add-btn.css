@@ -1,0 +1,6 @@
+.profile__add-btn {
+    width: min-content;
+    height: min-content;
+    align-self: center;
+    justify-self: end;
+}
