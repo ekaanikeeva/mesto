@@ -7,3 +7,20 @@
     margin-right: 25px;
     margin-bottom: 16px;
 }
+
+@media all and (max-width: 920px) {
+    .profile__name {
+        font-size: 4.5vw;
+        line-height: inherit;
+    }
+}
+
+@media all and (max-width: 480px) {
+    .profile__name {
+        font-size: 27px;
+        line-height: 32px;
+        text-align: center;
+        margin: 22.25px 15px 14px 0;
+    }
+}
+

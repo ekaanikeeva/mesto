@@ -3,4 +3,21 @@
     display: grid;
     grid-template-columns: min-content max-content min-content 1fr;
     grid-template-rows: 1fr;
+    margin-top: 40px;
+}
+
+@media all and (max-width:480px) {
+    .profile {
+        grid-template-rows: max-content min-content;
+    }
+}
+
+@media all and (max-width:420px) {
+    .profile {
+        grid-template-columns: 3fr 1fr;
+        
+        justify-items: center;
+        align-items: center;
+        margin-top: 42px;
+    }
 }

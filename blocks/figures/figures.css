@@ -1,0 +1,19 @@
+.figures {
+    display: grid;
+    gap: 20px 17px;
+    grid-template-columns: repeat(3, calc((100% - 32px)/3));
+}
+
+@media all and (max-width: 720px) {
+    .figures {
+        grid-template-columns: repeat(2, calc((100% - 32px)/2));
+        gap: 20px 5%;
+    }
+}
+
+@media all and (max-width: 480px) {
+    .figures {
+        grid-template-columns: 100%;
+        gap: 20px;
+    }
+}

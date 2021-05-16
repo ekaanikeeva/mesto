@@ -1,22 +1,15 @@
-.profile__status {
+.footer__caption {
     font-family: Inter, Arial, Helvetica, sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
     line-height: 22px;
+    color: #545454;
 }
 
-@media all and (max-width: 920px) {
-    .profile__status {
-        font-size: 2vw;
-        line-height: inherit;
-    }
-}
-
-@media all and (max-width: 480px) {
-    .profile__status {
+@media all and (max-width:420px) {
+    .footer__caption {
         font-size: 14px;
         line-height: 17px;
     }
 }
-

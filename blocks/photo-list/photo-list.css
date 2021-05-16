@@ -1,0 +1,11 @@
+.photo-list {
+    margin: 51px 0 67px;
+    width: 100%;
+    max-width: 100%;
+}
+
+@media all and (max-width: 480px) {
+    .photo-list {
+        margin: 36px 0 48px;
+    }
+}

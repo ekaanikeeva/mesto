@@ -11,21 +11,88 @@
 
 <body class="root">
     <header class="header">
-        <img class="header__logo" src="./images/logo.svg" alt="Белый текстовый логотип Место Россия">
+        <a class="header__link" href="#"><img class="header__logo" src="./images/logo.svg" alt="Белый текстовый логотип Место Россия"></a>
     </header>
 
-    <section class="profile">
-        <img class="profile__avatar" src="./images/Avatar.jpg" alt="Аватар профиля">
+    <main class="content">
 
-        <div class="profile__info">
-            <h1 class="profile__name">Жак-Ив Кусто</h1>
-            <p class="profile__status">Исследователь океана</p>
-        </div>
+        <section class="profile">
+            <img class="profile__avatar" src="./images/Avatar.jpg" alt="Аватар профиля">
 
-        <button class="profile__edit-btn"><img src="./images/Edit Button.svg" alt="Кнопка редактирования профиля"></button>
-        <button class="profile__add-btn"><img src="./images/Add Button.svg" alt="Кнопка добавления фото в профиль"></button>
+            <div class="profile__info">
+                <h1 class="profile__name">Жак-Ив Кусто</h1>
+                <p class="profile__status">Исследователь океана</p>
+            </div>
 
-    </section>
+            <button class="profile__edit-btn"></button>
+            <button class="profile__add-btn"></button>
+
+        </section>
+
+        <section class="photo-list">
+
+            <ul class="figures">
+
+                <li class="figure">
+                    <figure class="figure__pic-position"><img class="figure__pic" src="./images/photo__karachaevsk.jpg"
+                            alt="Древняя церковь на высокой горе"></figure>
+                    <figcaption class="figure__figcaption">
+                        <h2 class="figure__name">Карачаевск</h2>
+                    </figcaption>
+                    <button class="figure__like"></button>
+
+                </li>
+
+                <li class="figure">
+                    <figure class="figure__pic-position"><img class="figure__pic" src="./images/photo__elbrus.jpg"
+                            alt="Закат, равнина, Эльбрус вдалеке"></figure>
+                    <figcaption class="figure__figcaption">
+                        <h2 class="figure__name">Гора Эльбрус</h2>
+                    </figcaption>
+                    <button class="figure__like"></button>
+                </li>
+
+                <li class="figure">
+                    <figure class="figure__pic-position"><img class="figure__pic" src="./images/photo__dombai.jpg"
+                            alt="Лес, горы, пасмурно"></figure>
+                    <figcaption class="figure__figcaption">
+                        <h2 class="figure__name">Домбай</h2>
+                    </figcaption>
+                    <button class="figure__like"></button>
+                </li>
+
+                <li class="figure">
+                    <figure class="figure__pic-position"><img class="figure__pic" src="./images/photo__elbrus.jpg"
+                            alt="Закат, равнина, Эльбрус вдалеке"></figure>
+                    <figcaption class="figure__figcaption">
+                        <h2 class="figure__name">Гора Эльбрус</h2>
+                    </figcaption>
+                    <button class="figure__like"></button>
+                </li>
+
+                <li class="figure">
+                    <figure class="figure__pic-position"><img class="figure__pic" src="./images/photo__dombai.jpg"
+                            alt="Лес, горы, пасмурно"></figure>
+                    <figcaption class="figure__figcaption">
+                        <h2 class="figure__name">Домбай</h2>
+                    </figcaption>
+                    <button class="figure__like"></button>
+                </li>
+
+                <li class="figure">
+                    <figure class="figure__pic-position"><img class="figure__pic" src="./images/photo__karachaevsk.jpg"
+                            alt="Древняя церковь на высокой горе"></figure>
+                    <figcaption class="figure__figcaption">
+                        <h2 class="figure__name">Карачаево-Ч...</h2>
+                    </figcaption>
+                    <button class="figure__like"></button>
+                </li>
+            </ul>
+        </section>
+    </main>
+    <footer class="footer">
+        <p class="footer__caption">© 2020 Mesto Russia</p>
+    </footer>
 </body>
 
 </html>

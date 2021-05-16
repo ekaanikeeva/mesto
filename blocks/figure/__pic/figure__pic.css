@@ -1,0 +1,12 @@
+.figure__pic {
+    width: 100%;
+    display: block;
+}
+
+@media all and (min-width: 1280px) {
+    .figure__pic {
+        max-width: 282px;
+        max-height: 282px;
+    }
+}
+
