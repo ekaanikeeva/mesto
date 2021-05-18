@@ -5,6 +5,9 @@
     font-size: 24px;
     line-height: 29px;
     margin: 25px auto 31px 21px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 @media all and (max-width: 987px) {
@@ -31,7 +34,7 @@
     }
 }
 
-@media all and (max-width: 480px) {
+@media all and (max-width: 470px) {
     .figure__name {
         font-size: 24px;
         margin: 25px 0 25px 21px;

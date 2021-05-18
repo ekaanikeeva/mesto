@@ -1,17 +1,35 @@
 .figures {
     display: grid;
     gap: 20px 17px;
-    grid-template-columns: repeat(3, calc((100% - 32px)/3));
+    grid-template-columns: repeat(auto-fill, 280px);
 }
 
-@media all and (max-width: 720px) {
+@media all and (max-width: 971px) {
     .figures {
-        grid-template-columns: repeat(2, calc((100% - 32px)/2));
         gap: 20px 5%;
     }
 }
 
-@media all and (max-width: 480px) {
+@media all and (max-width: 856px) {
+    .figures {
+        grid-template-columns: repeat(2, 280px);
+    }
+}
+
+@media all and (max-width: 660px) {
+        .figures {
+            grid-template-columns: repeat(2, 240px);
+        }
+}
+
+@media all and (max-width: 570px) {
+    .figures {
+        grid-template-columns: repeat(2, 200px);
+    }
+}
+
+
+@media all and (max-width: 470px) {
     .figures {
         grid-template-columns: 100%;
         gap: 20px;

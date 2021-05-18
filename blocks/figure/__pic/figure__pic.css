@@ -1,6 +1,8 @@
 .figure__pic {
     width: 100%;
     display: block;
+    border-top-left-radius: 4%;
+    border-top-right-radius: 4%;
 }
 
 @media all and (min-width: 1280px) {
@@ -9,4 +11,5 @@
         max-height: 282px;
     }
 }
+
 

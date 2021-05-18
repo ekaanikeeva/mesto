@@ -5,12 +5,10 @@
     width: fit-content;
     background-color: white;
     border-radius: 4%;
-    overflow: hidden;
 }
 
-@media all and (max-width: 480px) {
+@media all and (max-width: 470px) {
     .figure {
         width: 100%;
     }
 }
-
