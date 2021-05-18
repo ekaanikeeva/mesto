@@ -11,7 +11,7 @@
 
 <body class="root">
     <header class="header">
-        <a class="header__link" href="#"><img class="header__logo" src="./images/logo.svg" alt="Белый текстовый логотип Место Россия"></a>
+        <img class="header__logo" src="./images/logo.svg" alt="Белый текстовый логотип Место Россия">
     </header>
 
     <main class="content">
@@ -20,8 +20,8 @@
             <img class="profile__avatar" src="./images/Avatar.jpg" alt="Аватар профиля">
 
             <div class="profile__info">
-                <h1 class="profile__name">Жак-Ив Кусто</h1>
-                <p class="profile__status">Исследователь океана</p>
+                <h1 id='profile__name' class="profile__name">Жак-Ив Кусто</h1>
+                <p id='profile__status' class="profile__status">Исследователь океана</p>
             </div>
 
             <button class="profile__edit-btn"></button>
@@ -34,18 +34,21 @@
             <ul class="figures">
 
                 <li class="figure">
-                    <figure class="figure__pic-position"><img class="figure__pic" src="./images/photo__karachaevsk.jpg"
-                            alt="Древняя церковь на высокой горе"></figure>
+                    <figure class="figure__pic-position"><img class="figure__pic"
+                            src="./images/photo__lenskije-stolby.jpg"
+                            alt="Ленские столбы - высокие вытянутые вверх скалы, которые громоздятся вдоль берега реки Лена">
+                    </figure>
                     <figcaption class="figure__figcaption">
-                        <h2 class="figure__name">Карачаевск</h2>
+                        <h2 class="figure__name">Ленские столбы</h2>
                     </figcaption>
                     <button class="figure__like"></button>
 
                 </li>
 
                 <li class="figure">
-                    <figure class="figure__pic-position"><img class="figure__pic" src="./images/photo__elbrus.jpg"
-                            alt="Закат, равнина, Эльбрус вдалеке"></figure>
+                    <figure class="figure__pic-position"><img class="figure__pic" src="./images/photo__elbrus-2.jpg"
+                            alt="Заснеженная гора Эльбрус, на переднем плане желтые цветы и равнина, покрытая зеленой травой">
+                    </figure>
                     <figcaption class="figure__figcaption">
                         <h2 class="figure__name">Гора Эльбрус</h2>
                     </figcaption>
@@ -53,8 +56,27 @@
                 </li>
 
                 <li class="figure">
-                    <figure class="figure__pic-position"><img class="figure__pic" src="./images/photo__dombai.jpg"
-                            alt="Лес, горы, пасмурно"></figure>
+                    <figure class="figure__pic-position"><img class="figure__pic" src="./images/photo__kiji.jpg"
+                            alt="Закат. Архитектурный ансамбль на острове Кижи Онежского озера, состоящий из двух церквей и колокольни XVIII-XIX веков">
+                    </figure>
+                    <figcaption class="figure__figcaption">
+                        <h2 class="figure__name">Кижи</h2>
+                    </figcaption>
+                    <button class="figure__like"></button>
+                </li>
+
+                <li class="figure">
+                    <figure class="figure__pic-position"><img class="figure__pic" src="./images/photo__shantar.jpg"
+                            alt="Шантарские острова и Охотское море в летнюю погоду"></figure>
+                    <figcaption class="figure__figcaption">
+                        <h2 class="figure__name">Шантарские острова</h2>
+                    </figcaption>
+                    <button class="figure__like"></button>
+                </li>
+
+                <li class="figure">
+                    <figure class="figure__pic-position"><img class="figure__pic" src="./images/photo__donbai.jpg"
+                            alt="Домбайские горы и живописная тропинка"></figure>
                     <figcaption class="figure__figcaption">
                         <h2 class="figure__name">Домбай</h2>
                     </figcaption>
@@ -62,28 +84,11 @@
                 </li>
 
                 <li class="figure">
-                    <figure class="figure__pic-position"><img class="figure__pic" src="./images/photo__elbrus.jpg"
-                            alt="Закат, равнина, Эльбрус вдалеке"></figure>
+                    <figure class="figure__pic-position"><img class="figure__pic"
+                            src="./images/photo__karachaevo-cherkessiya.jpg"
+                            alt="Закат. Шоанинский храм на вершине горы"></figure>
                     <figcaption class="figure__figcaption">
-                        <h2 class="figure__name">Гора Эльбрус</h2>
-                    </figcaption>
-                    <button class="figure__like"></button>
-                </li>
-
-                <li class="figure">
-                    <figure class="figure__pic-position"><img class="figure__pic" src="./images/photo__dombai.jpg"
-                            alt="Лес, горы, пасмурно"></figure>
-                    <figcaption class="figure__figcaption">
-                        <h2 class="figure__name">Домбай</h2>
-                    </figcaption>
-                    <button class="figure__like"></button>
-                </li>
-
-                <li class="figure">
-                    <figure class="figure__pic-position"><img class="figure__pic" src="./images/photo__karachaevsk.jpg"
-                            alt="Древняя церковь на высокой горе"></figure>
-                    <figcaption class="figure__figcaption">
-                        <h2 class="figure__name">Карачаево-Ч...</h2>
+                        <h2 class="figure__name">Карачаево-Черкессия</h2>
                     </figcaption>
                     <button class="figure__like"></button>
                 </li>
@@ -93,6 +98,19 @@
     <footer class="footer">
         <p class="footer__caption">© 2020 Mesto Russia</p>
     </footer>
+
+    <section class="popup">
+        <form action="#" class="popup__container">
+            <h2 class="popup__title">Редактировать профиль</h2>
+            <input type="text" class="popup__name" id="popup__name" placeholder="Как Вас зовут?">
+            <input type="text" class="popup__status" placeholder="Расскажите о себе" id="popup__status">
+            <button class="popup__btn-save">
+                <p class="popup__btn-save_text">Сохранить</p>
+            </button>
+            <button class="popup__btn-close" aria-label="Закрыть" title='Закрыть'>
+        </form>
+    </section>
+    <script src="./scripts/main.js"></script>
 </body>
 
 </html>
