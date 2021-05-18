@@ -1,6 +1,8 @@
 .figure__figcaption {
     grid-row: 2 / 3;
     max-width: 235px;
+    margin: 0;
+    padding: 0;
 }
 
 @media all and (max-width: 660px) {

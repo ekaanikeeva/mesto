@@ -37,21 +37,9 @@ main {
  * `article` contexts in Chrome, Firefox, and Safari.
  */
 
-h1, h2, h3, h4, h5, h6, p {
-  margin: 0;
-  padding: 0;
-}
-
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-
-}
-
-figure, figcaption {
-  margin: 0;
-  padding: 0;
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
 }
 
 /* Grouping content
@@ -178,11 +166,6 @@ textarea {
   font-size: 100%; /* 1 */
   line-height: 1.15; /* 1 */
   margin: 0; /* 2 */
-  padding: 0;
-  border: none;
-  font: inherit;
-  color: inherit;
-  background-color: transparent;
 }
 
 /**
