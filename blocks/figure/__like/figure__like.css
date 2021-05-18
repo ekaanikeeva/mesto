@@ -15,7 +15,3 @@
     opacity: 0.5;
     cursor: pointer;
 }
-
-.figure__like:focus {
-    background-image: url('../../../images/like_active.svg');
-}
