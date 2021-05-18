@@ -8,6 +8,8 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    grid-row: 2 / 3;
+    
 }
 
 @media all and (max-width: 987px) {

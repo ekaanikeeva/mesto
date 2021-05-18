@@ -23,11 +23,10 @@
 @import url(../blocks/photo-list/photo-list.css);
 @import url(../blocks/figures/figures.css);
 @import url(../blocks/figure/figure.css);
-@import url(../blocks/figure/__pic-position/figure__pic-position.css);
 @import url(../blocks/figure/__pic/figure__pic.css);
 @import url(../blocks/figure/__name/figure__name.css);
 @import url(../blocks/figure/__like/figure__like.css);
 @import url(../blocks/figure/__like/_active/figure__like_active.css);
-@import url(../blocks/figure/__figcaption/figure__figcaption.css);
+@import url(../blocks/figure/__name/_width/figure__name_width.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__caption/footer__caption.css);

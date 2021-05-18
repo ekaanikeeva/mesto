@@ -1,48 +1,45 @@
-.figure__figcaption {
-    grid-row: 2 / 3;
-    max-width: 235px;
-    margin: 0;
-    padding: 0;
+.figure__name_width {
+    max-width: 220px;
 }
 
 @media all and (max-width: 660px) {
-    .figure__figcaption {
+    .figure__name_width {
         max-width: 195px;
     }
 }
 
 @media all and (max-width: 570px) {
-    .figure__figcaption {
+    .figure__name_width {
         max-width: 155px;
     }
 }
 
 @media all and (max-width: 470px) {
-    .figure__figcaption {
+    .figure__name_width {
         max-width: 400px;
     }
 }
 
 @media all and (max-width: 385px) {
-    .figure__figcaption {
+    .figure__name_width {
         max-width: 290px;
     }
 }
 
 @media all and (max-width: 370px) {
-    .figure__figcaption {
+    .figure__name_width {
         max-width: 250px;
     }
 }
 
 @media all and (max-width: 330px) {
-    .figure__figcaption {
+    .figure__name_width {
         max-width: 235px;
     }
 }
 
 @media all and (max-width: 319px) {
-    .figure__figcaption {
+    .figure__name_width {
         max-width: 200px;
     }
 }

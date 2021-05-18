@@ -9,6 +9,11 @@
     background-image: url('../../../images/like.svg');
     background-repeat: no-repeat;
     transition: opacity 1s ease;
+    padding: 0;
+    border: none;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
 }
 
 .figure__like:hover {
