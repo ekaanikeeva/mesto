@@ -53,9 +53,7 @@ figure, figcaption {
   margin: 0;
   padding: 0;
 }
-figcaption {
-max-width: max-content;
-}
+
 /* Grouping content
    ========================================================================== */
 
