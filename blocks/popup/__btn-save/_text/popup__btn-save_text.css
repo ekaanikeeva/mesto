@@ -5,3 +5,10 @@
     line-height: 22px;
     text-align: center;
 }
+
+@media all and(max-width: 450px) {
+    .popup__btn-save_text {
+        font-size: 14px;
+        line-height: 17px;
+    }
+}
