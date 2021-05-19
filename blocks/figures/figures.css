@@ -1,13 +1,13 @@
 .figures {
     display: grid;
     gap: 20px 17px;
-    grid-template-columns: repeat(auto-fill, 280px);
+    grid-template-columns: repeat(auto-fill, 282px);
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
 
-@media all and (max-width: 971px) {
+@media all and (max-width: 977px) {
     .figures {
         gap: 20px 5%;
     }
