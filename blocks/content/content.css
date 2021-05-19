@@ -2,9 +2,3 @@
     max-width: 880px;
     margin: 0 auto;
 }
-
-@media all and (max-width: 480px) {
-    .content {
-        margin: 0 auto;
-    }
-}
