@@ -9,6 +9,7 @@
     white-space: nowrap;
     overflow: hidden;
     grid-row: 2 / 3;
+    max-width: 220px;
     
 }
 
@@ -41,5 +42,6 @@
         font-size: 24px;
         margin: 25px 0 25px 21px;
         line-height: 29px;
+        max-width: 400px;
     }
 }

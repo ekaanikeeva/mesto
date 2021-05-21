@@ -4,7 +4,7 @@
     
 }
 
-@media all and (max-width: 977px) {
+@media all and (max-width: 994px) {
     .photo-list {
         max-width: calc(282px*2 + 5%);
     }

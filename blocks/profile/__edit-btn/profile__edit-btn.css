@@ -15,14 +15,15 @@
 
 .profile__edit-btn:hover {
     cursor: pointer;
-    opacity: 0.3;
+    opacity: 0.6;
 }
 
 @media all and (max-width: 480px) {
     .profile__edit-btn {
         width: 18px;
         height: 18px;
-        margin-left: 14px;
+        margin-top: 52px;
+        margin-left: 15px;
     }
 }
 
@@ -32,6 +33,7 @@
         grid-row: 2 / 3;
         align-self: start;
         justify-self: center;
-        margin-top: 32%;
+        margin-top: 34px;
+        
     }
 }

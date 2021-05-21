@@ -24,8 +24,8 @@
                 <p id='profile__status' class="profile__status">Исследователь океана</p>
             </div>
 
-            <button class="profile__edit-btn"></button>
-            <button class="profile__add-btn"></button>
+            <button type="button" class="profile__edit-btn"></button>
+            <button type="button" class="profile__add-btn"></button>
 
         </section>
 
@@ -36,43 +36,43 @@
                 <li class="figure">
                     <img class="figure__pic" src="./images/photo__lenskije-stolby.jpg"
                         alt="Ленские столбы - высокие вытянутые вверх скалы, которые громоздятся вдоль берега реки Лена">
-                    <h2 class="figure__name figure__name_width">Ленские столбы</h2>
-                    <button class="figure__like"></button>
+                    <h2 class="figure__name">Ленские столбы</h2>
+                    <button type="button" class="figure__like"></button>
                 </li>
 
                 <li class="figure">
                     <img class="figure__pic" src="./images/photo__elbrus-2.jpg"
                         alt="Заснеженная гора Эльбрус, на переднем плане желтые цветы и равнина, покрытая зеленой травой">
-                    <h2 class="figure__name figure__name_width">Гора Эльбрус</h2>
-                    <button class="figure__like"></button>
+                    <h2 class="figure__name">Гора Эльбрус</h2>
+                    <button type="button" class="figure__like"></button>
                 </li>
 
                 <li class="figure">
                     <img class="figure__pic" src="./images/photo__kiji.jpg"
                         alt="Закат. Архитектурный ансамбль на острове Кижи Онежского озера, состоящий из двух церквей и колокольни XVIII-XIX веков">
-                    <h2 class="figure__name figure__name_width">Кижи</h2>
-                    <button class="figure__like"></button>
+                    <h2 class="figure__name">Кижи</h2>
+                    <button type="button" class="figure__like"></button>
                 </li>
 
                 <li class="figure">
                     <img class="figure__pic" src="./images/photo__shantar.jpg"
                         alt="Шантарские острова и Охотское море в летнюю погоду">
-                    <h2 class="figure__name figure__name_width">Шантарские острова</h2>
-                    <button class="figure__like"></button>
+                    <h2 class="figure__name">Шантарские острова</h2>
+                    <button type="button" class="figure__like"></button>
                 </li>
 
                 <li class="figure">
                     <img class="figure__pic" src="./images/photo__donbai.jpg"
                         alt="Домбайские горы и живописная тропинка">
-                    <h2 class="figure__name figure__name_width">Домбай</h2>
-                    <button class="figure__like"></button>
+                    <h2 class="figure__name">Домбай</h2>
+                    <button type="button" class="figure__like"></button>
                 </li>
 
                 <li class="figure">
                     <img class="figure__pic" src="./images/photo__karachaevo-cherkessiya.jpg"
                         alt="Закат. Шоанинский храм на вершине горы">
-                    <h2 class="figure__name figure__name_width">Карачаево-Черкессия</h2>
-                    <button class="figure__like"></button>
+                    <h2 class="figure__name">Карачаево-Черкессия</h2>
+                    <button type="button" class="figure__like"></button>
                 </li>
             </ul>
         </section>
@@ -82,15 +82,19 @@
     </footer>
 
     <section class="popup">
-        <form action="#" class="popup__container">
-            <h2 class="popup__title">Редактировать профиль</h2>
-            <input type="text" class="popup__name" id="popup__name" placeholder="Как Вас зовут?">
-            <input type="text" class="popup__status" placeholder="Расскажите о себе" id="popup__status">
-            <button class="popup__btn-save popup__btn-save_text">Сохранить</button>
-            <button class="popup__btn-close" aria-label="Закрыть" title='Закрыть'>
-            </button>
-        </form>
+        <div class="popup__container">
+            <button type="button" class="popup__btn-close" aria-label="Закрыть" title='Закрыть'></button>
+
+            <form action="#" name="form1" class="form">
+                <h2 class="form__title">Редактировать профиль</h2>
+                <input type="text" name="formInfo" class="form__info" id="popup__name" placeholder="Как Вас зовут?">
+                <input type="text" name="formInfo" class="form__info" placeholder="Расскажите о себе"
+                    id="popup__status">
+                <button type="submit" class="form__btn-save">Сохранить</button>
+            </form>
+        </div>
     </section>
+
     <script src="./scripts/main.js"></script>
 </body>
 
