@@ -30,70 +30,52 @@
         </section>
 
         <section class="photo-list">
-
-            <ul class="figures">
-
-                <li class="figure">
-                    <img class="figure__pic" src="./images/photo__lenskije-stolby.jpg"
-                        alt="Ленские столбы - высокие вытянутые вверх скалы, которые громоздятся вдоль берега реки Лена">
-                    <h2 class="figure__name">Ленские столбы</h2>
-                    <button type="button" class="figure__like"></button>
-                </li>
-
-                <li class="figure">
-                    <img class="figure__pic" src="./images/photo__elbrus-2.jpg"
-                        alt="Заснеженная гора Эльбрус, на переднем плане желтые цветы и равнина, покрытая зеленой травой">
-                    <h2 class="figure__name">Гора Эльбрус</h2>
-                    <button type="button" class="figure__like"></button>
-                </li>
-
-                <li class="figure">
-                    <img class="figure__pic" src="./images/photo__kiji.jpg"
-                        alt="Закат. Архитектурный ансамбль на острове Кижи Онежского озера, состоящий из двух церквей и колокольни XVIII-XIX веков">
-                    <h2 class="figure__name">Кижи</h2>
-                    <button type="button" class="figure__like"></button>
-                </li>
-
-                <li class="figure">
-                    <img class="figure__pic" src="./images/photo__shantar.jpg"
-                        alt="Шантарские острова и Охотское море в летнюю погоду">
-                    <h2 class="figure__name">Шантарские острова</h2>
-                    <button type="button" class="figure__like"></button>
-                </li>
-
-                <li class="figure">
-                    <img class="figure__pic" src="./images/photo__donbai.jpg"
-                        alt="Домбайские горы и живописная тропинка">
-                    <h2 class="figure__name">Домбай</h2>
-                    <button type="button" class="figure__like"></button>
-                </li>
-
-                <li class="figure">
-                    <img class="figure__pic" src="./images/photo__karachaevo-cherkessiya.jpg"
-                        alt="Закат. Шоанинский храм на вершине горы">
-                    <h2 class="figure__name">Карачаево-Черкессия</h2>
-                    <button type="button" class="figure__like"></button>
-                </li>
-            </ul>
+            <ul class="figures"></ul>
         </section>
     </main>
     <footer class="footer">
         <p class="footer__caption">© 2021 Mesto Russia</p>
     </footer>
 
-    <section class="popup">
-        <div class="popup__container">
-            <button type="button" class="popup__btn-close" aria-label="Закрыть" title='Закрыть'></button>
+    <div class="popups">
+        <section class="popup popup_type_edit">
+            <div class="popup__container">
+                <button type="button" class="popup__btn-close" aria-label="Закрыть" title='Закрыть'></button>
 
-            <form action="#" name="form1" class="form">
-                <h2 class="form__title">Редактировать профиль</h2>
-                <input type="text" name="form-info" class="form__info" id="popup__name" placeholder="Как Вас зовут?">
-                <input type="text" name="form-info" class="form__info" placeholder="Расскажите о себе"
-                    id="popup__status">
-                <button type="submit" class="form__btn-save">Сохранить</button>
-            </form>
-        </div>
-    </section>
+                <form action="#" name="form" class="form">
+                    <h2 class="form__title">Редактировать профиль</h2>
+                    <input type="text" name="form-info" class="form__info" id="popup__name"
+                        placeholder="Как Вас зовут?">
+                    <input type="text" name="form-info" class="form__info" placeholder="Расскажите о себе"
+                        id="popup__status">
+                    <button type="submit" class="form__btn-save">Сохранить</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="popup popup_type_add-card">
+            <div class="popup__container">
+                <button type="button" class="popup__btn-close" aria-label="Закрыть" title='Закрыть'></button>
+
+                <form action="#" name="form" class="form">
+                    <h2 class="form__title">Новое место</h2>
+                    <input type="text" name="form-info" class="form__info" id="popup__title" placeholder="Название">
+                    <input type="text" name="form-info" class="form__info" placeholder="Ссылка на картинку"
+                        id="popup__link">
+                    <button type="submit" class="form__btn-save">Создать</button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <template id="photo-card">
+        <li class="figure">
+            <img class="figure__pic" src="">
+            <button type="button" class="figure__basket"></button>
+            <h2 class="figure__name"></h2>
+            <button type="button" class="figure__like"></button>
+        </li>
+    </template>
 
     <script src="./scripts/main.js"></script>
 </body>
