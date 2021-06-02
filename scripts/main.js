@@ -9,8 +9,11 @@ const savePopupBtn = popups.querySelector('.form__btn-save');
 const popupEdit = document.querySelector('.popup_type_edit');
 const openAddPopupBtn = profile.querySelector('.profile__add-btn');
 const popupAdd = document.querySelector('.popup_type_add-card');
+const popupImg = document.querySelector('.popup_type_photo');
 const buttonsClosePopup = Array.from(popups.querySelectorAll('.popup__btn-close'));
 const photoTemplate = document.querySelector('#photo-card').content;
+const formImg = popups.querySelector('.form__img');
+
 
 
 let profileName = document.getElementById('profile__name');
@@ -24,6 +27,7 @@ let photoElement;
 //загруженные фото
 function addPhoto () {
     photoElement = photoTemplate.querySelector('.figure').cloneNode(true);
+    photoElement.querySelector('.figure__pic-btn').addEventListener('click', openPhotoForm)
     photoElement.querySelector('.figure__pic').src = "https://images.unsplash.com/photo-1490879112094-281fea0883dc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80"; 
     photoElement.querySelector('.figure__name').textContent = "Остров Ольхон";
     photoElement.querySelector('.figure__like').addEventListener('click', activeLike);
@@ -88,6 +92,11 @@ function openEditPopupForm () {
     popupStatus.value = profileStatus.textContent;
 }
 
+function openPhotoForm () {
+    activePopup(popupImg)
+    formImg.src = photoElement.src;
+}
+
 //сохраняет изменения popup
 function savePopupChanges (submit) {
     submit.preventDefault();
@@ -98,6 +107,7 @@ function savePopupChanges (submit) {
         profileStatus.textContent = popupStatus.value;
     } 
     else  {
+
         photoElement = photoTemplate.querySelector('.figure').cloneNode(true);
         photoElement.querySelector('.figure__name').textContent = popupSaveName.value;
         photoElement.querySelector('.figure__pic').src = popupSaveLink.value;
@@ -135,4 +145,6 @@ form.forEach((element) => {
 buttonsClosePopup.forEach((element) => {
     element.addEventListener('click', closePopupForm)
 })
+
+
     
