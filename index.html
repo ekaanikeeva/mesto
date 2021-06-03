@@ -20,8 +20,8 @@
             <img class="profile__avatar" src="./images/Avatar.jpg" alt="Аватар профиля">
 
             <div class="profile__info">
-                <h1 id='profile__name' class="profile__name">Жак-Ив Кусто</h1>
-                <p id='profile__status' class="profile__status">Исследователь океана</p>
+                <h1 id='profile-name' class="profile__name">Жак-Ив Кусто</h1>
+                <p id='profile-status' class="profile__status">Исследователь океана</p>
             </div>
 
             <button type="button" class="profile__edit-btn"></button>
@@ -44,10 +44,10 @@
 
                 <form action="#" name="form" class="form">
                     <h2 class="form__title">Редактировать профиль</h2>
-                    <input type="text" name="form-info" class="form__info" id="popup__name"
+                    <input type="text" name="form-info" class="form__info" id="popup-name"
                         placeholder="Как Вас зовут?">
                     <input type="text" name="form-info" class="form__info" placeholder="Расскажите о себе"
-                        id="popup__status">
+                        id="popup-status">
                     <button type="submit" class="form__btn-save">Сохранить</button>
                 </form>
             </div>
@@ -59,21 +59,21 @@
 
                 <form action="#" name="form" class="form">
                     <h2 class="form__title">Новое место</h2>
-                    <input type="text" name="form-info" class="form__info" id="popup__title" placeholder="Название">
+                    <input type="text" name="form-info" class="form__info" id="popup-title" placeholder="Название">
                     <input type="text" name="form-info" class="form__info" placeholder="Ссылка на картинку"
-                        id="popup__link">
+                        id="popup-link">
                     <button type="submit" class="form__btn-save">Создать</button>
                 </form>
             </div>
         </section>
 
         <section class="popup popup_type_photo">
-            <div class="popup__container">
+            <div class="popup__container-photo">
                 <button type="button" class="popup__btn-close" aria-label="Закрыть" title='Закрыть'></button>
 
                 <form action="#" name="form" class="form">
-                    <p>HELLO</p>
                     <img class="form__img" src="" alt="">
+                    <h2 class="form__name"></h2>
                 </form>
             </div>
         </section>
