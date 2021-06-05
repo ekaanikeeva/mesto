@@ -5,6 +5,9 @@
     display: block;
     border-top-left-radius: 4%;
     border-top-right-radius: 4%;
+    cursor: pointer;
+    grid-column: 1 / -1;
+    grid-row: 1 / 2;
 }
 
 @media all and (min-width: 1280px) {
