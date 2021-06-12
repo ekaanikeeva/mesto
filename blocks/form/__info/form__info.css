@@ -9,6 +9,6 @@
     margin: 0;
 }
 
-.form__info:first-of-type {
-    margin-bottom: 30px;
+.form__info:last-of-type {
+    margin-top: 30px;
 }
