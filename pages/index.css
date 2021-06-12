@@ -25,6 +25,9 @@
 @import url(../blocks/form/__title/form__title.css);
 @import url(../blocks/form/__info/form__info.css);
 @import url(../blocks/form/__btn-save/form__btn-save.css);
+@import url(../blocks/form/__btn-save/__btn-save_inactive/form__btn-save_inactive.css);
+@import url(../blocks/form/__info/_type/form__info_type_error.css);
+@import url(../blocks/form/__input-error/form__input-error.css);
 @import url(../blocks/photo-list/photo-list.css);
 @import url(../blocks/figures/figures.css);
 @import url(../blocks/figure/figure.css);
