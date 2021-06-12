@@ -1,9 +1,6 @@
 const popups = document.querySelector('.popups');
 const profile = document.querySelector('.profile');
-const popup = document.querySelector('.popup');
-const forms = Array.from(popups.querySelectorAll('.form'));
-const formEdit = document.querySelector('.form_edit')
-const formAdd = document.querySelector('.form_add-card')
+const popup = Array.from(popups.querySelectorAll('.popup'))
 const figures = document.querySelector('.figures');
 const popupContainer = document.querySelector('.popup__container')
 const openEditPopupBtn = profile.querySelector('.profile__edit-btn');
@@ -16,13 +13,17 @@ const closePopupButtons = Array.from(popups.querySelectorAll('.popup__btn-close'
 const photoTemplate = document.querySelector('#photo-card').content;
 const popupImgPicture = popups.querySelector('.popup__img');
 const popupImgName = popups.querySelector('.popup__name');
-
 const profileName = document.querySelector('.profile__name');
-const popupName = document.querySelector('.form__info_name');
 const profileStatus = document.querySelector('.profile__status');
-const popupStatus = document.querySelector('.form__info_status');
-const popupSaveName = popups.querySelector('.form__info_title');
-const popupSaveLink = popups.querySelector('.form__info_link');
+
+
+// поиск форм и инпутов форм через "name"
+const formEdit = document.forms.edit;
+const formAdd = document.forms.add;
+const popupName = formEdit.elements.name;
+const popupStatus = formEdit.elements.status;
+const popupSaveName = formAdd.elements.title;
+const popupSaveLink = formAdd.elements.link;
 
 
 //функция создания одной карточки
@@ -51,12 +52,16 @@ addPhotoCards();
 
 //открытие попап
 function activePopup (popup) { 
-            popup.classList.add('popup_opened');
+    popup.classList.add('popup_opened');
+
+    document.addEventListener('keydown', closePopupKey)
 }
 
 //закрытие попап
 function closePopupForm (popup) {
     popup.classList.remove('popup_opened');
+
+    document.removeEventListener('keydown', closePopupKey)
 }
 
 //параметры, передаваемые при открытии попапа редактирования
@@ -87,7 +92,17 @@ function saveAddPopupChanges (submit) {
     );
     popupSaveName.value = "";
     popupSaveLink.value = "";
+
     closePopupForm(popupAdd);
+}
+
+// закрытие попапа при нажатии Esc
+function closePopupKey (evt) {
+    if (evt.key == "Escape") {
+        popup.forEach((element) => {
+            closePopupForm(element)
+        })
+    }
 }
 
 //меняет цвет лайка
@@ -112,6 +127,22 @@ function pictureForm (element) {
     popupImgName.textContent = name.textContent;
 }
 
+// ищет ближайший попап и закрывает его
+function findAndClosePopup (evt) {
+    let namePopup = evt.target.closest(".popup");
+    closePopupForm(namePopup);
+}
+
+// функция для определения ближайшего попапа и закрытия попапа по оверлею
+function closeTargetPopupForOverlay(evt) {
+    let namePopup = evt.target.closest(".popup");
+    let container = evt.target.closest(".popup__container");
+    let photoContainer = evt.target.closest(".popup__container-photo");
+
+    if(!container && !photoContainer) {
+        closePopupForm(namePopup);
+    }
+}
 
 openEditPopupBtn.addEventListener('click', () => {
     openEditPopupForm();
@@ -120,6 +151,7 @@ openEditPopupBtn.addEventListener('click', () => {
 
 openAddPopupBtn.addEventListener('click', () => {
     activePopup(popupAdd);
+    toggleBtnCondition(formAdd, savePopupBtn);
  });
 
 formEdit.addEventListener('submit', saveEditPopupChanges)
@@ -127,8 +159,10 @@ formEdit.addEventListener('submit', saveEditPopupChanges)
 formAdd.addEventListener('submit', saveAddPopupChanges)
 
 closePopupButtons.forEach((element) => {
-    element.addEventListener('click', (evt) => {
-        let namePopup = evt.target.closest(".popup");
-        closePopupForm(namePopup);
-    });
+    element.addEventListener('click', findAndClosePopup)
 })
+
+popup.forEach((element) => {
+    element.addEventListener('mousedown', closeTargetPopupForOverlay)
+})
+
