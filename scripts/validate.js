@@ -27,11 +27,13 @@ const inputValidity = (formElement, inputElement) => {
 
 //возвращает true если валидация инпутов пройдена и falce если нет
 const hasInvalidInput = (inputList) => {
-
-    return inputList.some((inputElement) => {
-        return !inputElement.validity.valid;
-    })
+    if (popupSaveName.value !== "" || popupSaveLink.value !== "") {
+        return inputList.some((inputElement) => {
+            return !inputElement.validity.valid;
+        })
+    }
 }
+
 
 // функция для активации кнопки при валидных инпутах
 const toggleBtnCondition = (inputList, buttonElement) => {
@@ -59,7 +61,6 @@ const setEventListeners = (formElement) => {
     inputList.forEach((inputElement) => {
         inputElement.addEventListener('input', () => {
             inputValidity(formElement, inputElement)
-            console.log(formElement, inputElement)
             toggleBtnCondition(inputList, buttonElement);
         })
     })
