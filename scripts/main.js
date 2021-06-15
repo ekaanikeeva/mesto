@@ -1,6 +1,6 @@
 const popups = document.querySelector('.popups');
 const profile = document.querySelector('.profile');
-const popup = Array.from(popups.querySelectorAll('.popup'))
+const popupList = Array.from(popups.querySelectorAll('.popup'))
 const figures = document.querySelector('.figures');
 const popupContainer = document.querySelector('.popup__container')
 const openEditPopupBtn = profile.querySelector('.profile__edit-btn');
@@ -29,13 +29,21 @@ const popupSaveLink = formAdd.elements.link;
 //функция создания одной карточки
 function createPhotoCard (item) {
     photoElement = photoTemplate.querySelector('.figure').cloneNode(true);
-
-    photoElement.querySelector('.figure__pic-btn').addEventListener('click', pictureForm);
-    photoElement.querySelector('.figure__pic').src = item.link; 
-    photoElement.querySelector('.figure__pic').alt = item.alt;
-    photoElement.querySelector('.figure__name').textContent = item.name;
+    const elementPic = photoElement.querySelector('.figure__pic');
+    const elementName = photoElement.querySelector('.figure__name');
     photoElement.querySelector('.figure__like').addEventListener('click', activeLike);
     photoElement.querySelector('.figure__basket').addEventListener('click', deletePhotoElement);
+    elementPic.src = item.link; 
+    elementPic.alt = item.alt;
+    elementName.textContent = item.name;
+
+    // открывает попап с фотографией
+    elementPic.addEventListener('click', () => {
+        activePopup(popupImg);
+        popupImgPicture.src = elementPic.src;
+        popupImgPicture.alt = elementPic.alt;
+        popupImgName.textContent = elementName.textContent;
+    });  
 
     return photoElement;
 }
@@ -58,7 +66,7 @@ function activePopup (popup) {
 }
 
 //закрытие попап
-function closePopupForm (popup) {
+function closePopup (popup) {
     popup.classList.remove('popup_opened');
 
     document.removeEventListener('keydown', closePopupKey)
@@ -77,7 +85,7 @@ function saveEditPopupChanges (submit) {
     profileName.textContent = popupName.value;
     profileStatus.textContent = popupStatus.value;
 
-    closePopupForm(popupEdit);
+    closePopup(popupEdit);
 }
 
 //сохранение изменений попапа добавления
@@ -93,15 +101,14 @@ function saveAddPopupChanges (submit) {
     popupSaveName.value = "";
     popupSaveLink.value = "";
 
-    closePopupForm(popupAdd);
+    closePopup(popupAdd);
 }
 
 // закрытие попапа при нажатии Esc
 function closePopupKey (evt) {
     if (evt.key == "Escape") {
-        popup.forEach((element) => {
-            closePopupForm(element)
-        })
+        const popupOpened = popups.querySelector('.popup_opened')
+        closePopup(popupOpened)
     }
 }
 
@@ -116,31 +123,32 @@ function deletePhotoElement (evt) {
    photoFigure.remove();
 }
 
-//открывает форму с фотографией
-function pictureForm (element) {
-    activePopup(popupImg)
-    const figureEl = element.target.closest('.figure');
-    const pict = figureEl.querySelector('.figure__pic')
-    const name = figureEl.querySelector('.figure__name')
-    popupImgPicture.src = pict.src;
-    popupImgPicture.alt = pict.alt;
-    popupImgName.textContent = name.textContent;
-}
+// открывает форму с фотографией
+// function pictureForm (element) {
+//     activePopup(popupImg);
+//     const figureEl = element.target.closest('.figure');
+//     const pict = figureEl.querySelector('.figure__pic');
+//     const name = figureEl.querySelector('.figure__name');
+//     popupImgPicture.src = pict.src;
+//     popupImgPicture.alt = pict.alt;
+//     popupImgName.textContent = name.textContent;
+// }
+
 
 // ищет ближайший попап и закрывает его
 function findAndClosePopup (evt) {
-    let namePopup = evt.target.closest(".popup");
-    closePopupForm(namePopup);
+    const namePopup = evt.target.closest(".popup");
+    closePopup(namePopup);
 }
 
 // функция для определения ближайшего попапа и закрытия попапа по оверлею
 function closeTargetPopupForOverlay(evt) {
-    let namePopup = evt.target.closest(".popup");
-    let container = evt.target.closest(".popup__container");
-    let photoContainer = evt.target.closest(".popup__container-photo");
+    const namePopup = evt.target.closest(".popup");
+    const container = evt.target.closest(".popup__container");
+    const photoContainer = evt.target.closest(".popup__container-photo");
 
     if(!container && !photoContainer) {
-        closePopupForm(namePopup);
+        closePopup(namePopup);
     }
 }
 
@@ -162,7 +170,7 @@ closePopupButtons.forEach((element) => {
     element.addEventListener('click', findAndClosePopup)
 })
 
-popup.forEach((element) => {
+popupList.forEach((element) => {
     element.addEventListener('mousedown', closeTargetPopupForOverlay)
 })
 
