@@ -7,32 +7,35 @@ const showInputError = (formElement, inputElement, errorMessage) => {
 }
 
 // убирает класс с ошибкой
-const removeInputError = ((formElement, inputElement) => {
-    inputElement.classList.remove('form__input_type_error');
+const removeInputError = (formElement, inputElement) => {
+    
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-    errorElement.classList.remove('form__input-error_active');
+    inputElement.classList.remove('form__info_type_error')
     errorElement.textContent = '';
-})
+    errorElement.classList.remove('form__input-error_active');
+}
   
   // проверяет валидность инпута
 const inputValidity = (formElement, inputElement) => {
 
     if (!inputElement.validity.valid) {
+        console.log("no valid")
       showInputError(formElement, inputElement, inputElement.validationMessage);
     } 
     else {
+        console.log("valid")
       removeInputError(formElement, inputElement);
     }
 }
 
-//возвращает true если валидация инпутов пройдена и falce если нет
+// возвращает true если валидация инпутов пройдена и falce если нет
 const hasInvalidInput = (inputList) => {
-    if (popupSaveName.value !== "" || popupSaveLink.value !== "") {
-        return inputList.some((inputElement) => {
+            return inputList.some((inputElement) => {
             return !inputElement.validity.valid;
-        })
-    }
+        }) 
 }
+
+// const hasInvalidInput = inputList => inputList.some(inputElement => !inputElement.validity.valid)
 
 
 // функция для активации кнопки при валидных инпутах
