@@ -159,7 +159,6 @@ openEditPopupBtn.addEventListener('click', () => {
 
 openAddPopupBtn.addEventListener('click', () => {
     activePopup(popupAdd);
-    toggleBtnCondition(formAdd, savePopupBtn);
  });
 
 formEdit.addEventListener('submit', saveEditPopupChanges)
