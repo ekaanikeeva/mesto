@@ -19,11 +19,9 @@ const removeInputError = (formElement, inputElement) => {
 const inputValidity = (formElement, inputElement) => {
 
     if (!inputElement.validity.valid) {
-        console.log("no valid")
       showInputError(formElement, inputElement, inputElement.validationMessage);
     } 
     else {
-        console.log("valid")
       removeInputError(formElement, inputElement);
     }
 }
