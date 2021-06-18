@@ -19,16 +19,14 @@ const removeInputError = (formElement, inputElement) => {
 const inputValidity = (formElement, inputElement) => {
 
     if (!inputElement.validity.valid) {
-        console.log("no valid")
       showInputError(formElement, inputElement, inputElement.validationMessage);
     } 
     else {
-        console.log("valid")
       removeInputError(formElement, inputElement);
     }
 }
 
-// возвращает true если валидация инпутов пройдена и falce если нет
+// возвращает true если валидация инпутов пройдена и false если нет
 const hasInvalidInput = (inputList) => {
             return inputList.some((inputElement) => {
             return !inputElement.validity.valid;
@@ -45,9 +43,11 @@ const toggleBtnCondition = (inputList, buttonElement) => {
     if (hasInvalidInput(inputList)) {
         // сделать неактивной
         buttonElement.classList.add('form__btn-save_inactive');
+        buttonElement.disabled = true;
     } else {
         // иначе - активной
         buttonElement.classList.remove('form__btn-save_inactive');
+        buttonElement.disabled = false;
     }
 }
 
