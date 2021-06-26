@@ -1,5 +1,5 @@
 
-class FormValidator {
+export class FormValidator {
     constructor (formElement, validationElement) {
         this.formElement = formElement;
         this.formSelector = validationElement.formSelector;
@@ -96,8 +96,3 @@ class FormValidator {
         this.__setEventListeners();
     }
 }
-
-const editFormValidator = new FormValidator (formEdit, validationElement);
-const addFormValidator = new FormValidator (formAdd, validationElement);
-editFormValidator.enableValidation();
-addFormValidator.enableValidation();

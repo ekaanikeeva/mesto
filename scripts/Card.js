@@ -1,17 +1,29 @@
-class Card {
+import { 
+    activeLike, 
+    deletePhotoElement, 
+    activePopup, 
+    popupImg, 
+    popupImgName, 
+    popupImgPicture } from "./main.js";
+
+
+export class Card {
     constructor (name, link, alt) {
         this.name = name;
         this.link = link;
         this.alt = alt;
     }
 
+    // получает элемент из темплейта
     __getTemplate () {
+        const photoTemplate = document.querySelector('#photo-card').content;
         const photoCard = photoTemplate.querySelector('.figure').cloneNode(true);
         
         return photoCard;
     }
 
-    generateCard () {
+    // создает одну карточку
+    __createPhotoCard () {
         this._element = this.__getTemplate ()
 
         const elementPic = this._element.querySelector('.figure__pic');
@@ -22,7 +34,7 @@ class Card {
         elementPic.alt = this.alt;
         elementName.textContent = this.name;
 
-            // открывает попап с фотографией
+        // открывает попап с фотографией
         elementPic.addEventListener('click', () => {
             activePopup(popupImg);
             popupImgPicture.src = this.link;
@@ -34,8 +46,5 @@ class Card {
     }
 }
 
-initialCards.forEach((item) => {
-    const card = new Card(item.name, item.link, item.alt);
-    const photo = card.generateCard();
-    figures.append(photo);
-})
+
+

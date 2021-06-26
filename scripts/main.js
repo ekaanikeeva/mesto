@@ -1,3 +1,9 @@
+
+import { Card } from "./Card.js";
+import { FormValidator } from "./FormValidator.js";
+import { initialCards } from "./initial-cards.js";
+
+
 const popups = document.querySelector('.popups');
 const profile = document.querySelector('.profile');
 const popupList = Array.from(popups.querySelectorAll('.popup'))
@@ -8,14 +14,13 @@ const savePopupBtn = popups.querySelector('.form__btn-save');
 const popupEdit = document.querySelector('.popup_type_edit');
 const openAddPopupBtn = profile.querySelector('.profile__add-btn');
 const popupAdd = document.querySelector('.popup_type_add-card');
-const popupImg = document.querySelector('.popup_type_photo');
+export const popupImg = document.querySelector('.popup_type_photo');
 const closePopupButtons = Array.from(popups.querySelectorAll('.popup__btn-close'));
-const photoTemplate = document.querySelector('#photo-card').content;
-const popupImgPicture = popups.querySelector('.popup__img');
-const popupImgName = popups.querySelector('.popup__name');
+
+export const popupImgPicture = popups.querySelector('.popup__img');
+export const popupImgName = popups.querySelector('.popup__name');
 const profileName = document.querySelector('.profile__name');
 const profileStatus = document.querySelector('.profile__status');
-
 
 // поиск форм и инпутов форм через "name"
 const formEdit = document.forms.edit;
@@ -25,60 +30,50 @@ const popupStatus = formEdit.elements.status;
 const popupSaveName = formAdd.elements.title;
 const popupSaveLink = formAdd.elements.link;
 
-
-//функция создания одной карточки
-function createPhotoCard (item) {
-    photoElement = photoTemplate.querySelector('.figure').cloneNode(true);
-    const elementPic = photoElement.querySelector('.figure__pic');
-    const elementName = photoElement.querySelector('.figure__name');
-    photoElement.querySelector('.figure__like').addEventListener('click', activeLike);
-    photoElement.querySelector('.figure__basket').addEventListener('click', deletePhotoElement);
-    elementPic.src = item.link; 
-    elementPic.alt = item.alt;
-    elementName.textContent = item.name;
-
-    // открывает попап с фотографией
-    elementPic.addEventListener('click', () => {
-        activePopup(popupImg);
-        popupImgPicture.src = elementPic.src;
-        popupImgPicture.alt = elementPic.alt;
-        popupImgName.textContent = elementName.textContent;
-    });  
-
-    return photoElement;
+const validationElement = {
+    formSelector: '.form',
+    inputSelector: '.form__info',
+    buttonSelector: '.form__btn-save',
+    inactiveButtonClass: 'form__btn-save_inactive',
+    inputErrorClass: 'form__info_type_error',
+    errorClass: '.form__input-error_active'
 }
 
-//добавление карточек из массива
-function addPhotoCards () {
-    initialCards.forEach((item) => {
-        const photoCard = createPhotoCard (item);
-        figures.append(photoCard);
-    })
-    
-};
-addPhotoCards();
+const editFormValidator = new FormValidator (formEdit, validationElement);
+const addFormValidator = new FormValidator (formAdd, validationElement);
+editFormValidator.enableValidation();
+addFormValidator.enableValidation();
 
-//открытие попап
-function activePopup (popup) { 
+
+
+// добавление фотокарточек на страницу
+initialCards.forEach((item) => {
+    const card = new Card(item.name, item.link, item.alt);
+    const photo = card.__createPhotoCard();
+    figures.append(photo);
+})
+
+// открытие попап
+export function activePopup (popup) { 
     popup.classList.add('popup_opened');
 
     document.addEventListener('keydown', closePopupKey)
 }
 
-//закрытие попап
+// закрытие попап
 function closePopup (popup) {
     popup.classList.remove('popup_opened');
 
     document.removeEventListener('keydown', closePopupKey)
 }
 
-//параметры, передаваемые при открытии попапа редактирования
+// параметры, передаваемые при открытии попапа редактирования
 function openEditPopupForm () {
     popupName.value = profileName.textContent;
     popupStatus.value = profileStatus.textContent;
 }
 
-//сохранение изменений попапа редактирования
+// сохранение изменений попапа редактирования
 function saveEditPopupChanges (submit) {
     submit.preventDefault();
 
@@ -88,16 +83,14 @@ function saveEditPopupChanges (submit) {
     closePopup(popupEdit);
 }
 
-//сохранение изменений попапа добавления
+// сохранение изменений попапа добавления
 function saveAddPopupChanges (submit) {
     submit.preventDefault();
-    figures.prepend(
-      createPhotoCard({
-        name: popupSaveName.value,
-        link: popupSaveLink.value,
-        alt: popupSaveName.value
-      })
-    );
+
+    const cardAdd = new Card (popupSaveName.value, popupSaveLink.value, popupSaveName.value);
+    const photo = cardAdd.__createPhotoCard();
+    figures.prepend(photo);
+
     popupSaveName.value = "";
     popupSaveLink.value = "";
 
@@ -112,28 +105,16 @@ function closePopupKey (evt) {
     }
 }
 
-//меняет цвет лайка
-function activeLike (evt) {
+// меняет цвет лайка
+export function activeLike (evt) {
     evt.target.classList.toggle('figure__like_active');
 }
 
-//удаляет элемент
-function deletePhotoElement (evt) {
+// удаляет элемент
+export function deletePhotoElement (evt) {
    const photoFigure = evt.target.closest('.figure');
    photoFigure.remove();
 }
-
-// открывает форму с фотографией
-// function pictureForm (element) {
-//     activePopup(popupImg);
-//     const figureEl = element.target.closest('.figure');
-//     const pict = figureEl.querySelector('.figure__pic');
-//     const name = figureEl.querySelector('.figure__name');
-//     popupImgPicture.src = pict.src;
-//     popupImgPicture.alt = pict.alt;
-//     popupImgName.textContent = name.textContent;
-// }
-
 
 // ищет ближайший попап и закрывает его
 function findAndClosePopup (evt) {
@@ -172,4 +153,3 @@ closePopupButtons.forEach((element) => {
 popupList.forEach((element) => {
     element.addEventListener('mousedown', closeTargetPopupForOverlay)
 })
-
