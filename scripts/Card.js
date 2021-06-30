@@ -1,6 +1,4 @@
 import { 
-    activeLike, 
-    deletePhotoElement, 
     activePopup, 
     popupImg, 
     popupImgName, 
@@ -8,39 +6,65 @@ import {
 
 
 export class Card {
-    constructor (name, link, alt) {
+
+    constructor (name, link, cardSelector) {
         this.name = name;
         this.link = link;
-        this.alt = alt;
+        this.cardSelector = cardSelector;
     }
 
     // получает элемент из темплейта
-    __getTemplate () {
-        const photoTemplate = document.querySelector('#photo-card').content;
-        const photoCard = photoTemplate.querySelector('.figure').cloneNode(true);
+    _getTemplate () {
+
+        const photoCard = document
+        .querySelector(this.cardSelector)
+        .content.querySelector('.figure')
+        .cloneNode(true);
         
         return photoCard;
     }
 
-    // создает одну карточку
-    __createPhotoCard () {
-        this._element = this.__getTemplate ()
+    // меняет цвет лайка
+    _activeLike () {
 
-        const elementPic = this._element.querySelector('.figure__pic');
-        const elementName = this._element.querySelector('.figure__name');
-        this._element.querySelector('.figure__like').addEventListener('click', activeLike);
-        this._element.querySelector('.figure__basket').addEventListener('click', deletePhotoElement);
-        elementPic.src = this.link; 
-        elementPic.alt = this.alt;
-        elementName.textContent = this.name;
+        this._element.querySelector('.figure__like').classList.toggle('figure__like_active');
+    }
 
+    // удаляет элемент
+    _deletePhotoElement () {
+
+        this._element.remove();
+    }
+
+    // устанавливает слушатели событий
+    _setEventListeners () {
+
+        this._element.querySelector('.figure__like').addEventListener('click', () => {
+            this._activeLike();
+        });
+        this._element.querySelector('.figure__basket').addEventListener('click', () => {
+            this._deletePhotoElement();
+        });
         // открывает попап с фотографией
-        elementPic.addEventListener('click', () => {
+        this._element.querySelector('.figure__pic').addEventListener('click', () => {
             activePopup(popupImg);
             popupImgPicture.src = this.link;
-            popupImgPicture.alt = this.alt;
+            popupImgPicture.alt = this.name;
             popupImgName.textContent = this.name;
         }); 
+    }
+
+    // создает одну карточку
+    createPhotoCard () {
+         
+        this._element = this._getTemplate();
+
+        this._setEventListeners();
+        const elementPic = this._element.querySelector('.figure__pic');
+        const elementName = this._element.querySelector('.figure__name');
+        elementPic.src = this.link; 
+        elementPic.alt = this.name;
+        elementName.textContent = this.name;
 
         return this._element;
     }

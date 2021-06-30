@@ -36,7 +36,6 @@ export class FormValidator {
          
         if (!inputElement.validity.valid) {
             
-            console.log(inputElement.validationMessage)
             this.__showInputError (inputElement, inputElement.validationMessage);
         } else {
             this.__removeInputError(inputElement);
@@ -55,7 +54,10 @@ export class FormValidator {
 
     // функция для активации кнопки при валидных инпутах
     __toggleBtnCondition (inputList, buttonElement) {
-
+        // if (this.formElement.classList.contains('form_add-card'))
+        // {
+        //     this.__toggleBtnCondition(inputList, buttonElement);
+        // }
         // Если есть хотя бы один невалидный инпут
         if (this.__hasInvalidInput(inputList)) {
             // сделать неактивной
@@ -78,9 +80,17 @@ export class FormValidator {
             this.__toggleBtnCondition(inputList, buttonElement);
         }
         
+        
         inputList.forEach((inputElement) => {
+            if(this.formElement.classList.contains('form_edit'))
+            {
+                this.__removeInputError (inputElement);
+                buttonElement.classList.remove(this.buttonElementInactiveClass);
+                buttonElement.disabled = false;
+            }
+            
             inputElement.addEventListener('input', () => {
-                console.log(inputElement)
+
                 this.__inputValidity(inputElement)
                 this.__toggleBtnCondition(inputList, buttonElement);
             })
