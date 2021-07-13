@@ -1,16 +1,10 @@
-import { 
-    activePopup, 
-    popupImg, 
-    popupImgName, 
-    popupImgPicture } from "./main.js";
-
-
 export class Card {
 
-    constructor (name, link, cardSelector) {
+    constructor (name, link, cardSelector, handleCardClick) {
         this.name = name;
         this.link = link;
         this.cardSelector = cardSelector;
+        this.handleCardClick = handleCardClick;
     }
 
     // получает элемент из темплейта
@@ -46,12 +40,9 @@ export class Card {
             this._deletePhotoElement();
         });
         // открывает попап с фотографией
+
         this._element.querySelector('.figure__pic').addEventListener('click', () => {
-            activePopup(popupImg);
-            popupImgPicture.src = this.link;
-            popupImgPicture.alt = this.name;
-            popupImgName.textContent = this.name;
-        }); 
+            this.handleCardClick () })
     }
 
     // создает одну карточку
