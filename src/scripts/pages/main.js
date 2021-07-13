@@ -23,7 +23,7 @@ import {
     popupImg
 } from "../utils/constants.js"
 
-
+import "../../pages/index.css"
 
 // включение валидации форм
 const editFormValidator = new FormValidator (formEdit, validationElement);
