@@ -54,10 +54,7 @@ export class FormValidator {
 
     // функция для активации кнопки при валидных инпутах
     __toggleBtnCondition (inputList, buttonElement) {
-        // if (this.formElement.classList.contains('form_add-card'))
-        // {
-        //     this.__toggleBtnCondition(inputList, buttonElement);
-        // }
+        
         // Если есть хотя бы один невалидный инпут
         if (this.__hasInvalidInput(inputList)) {
             // сделать неактивной
@@ -68,6 +65,12 @@ export class FormValidator {
             buttonElement.classList.remove(this.buttonElementInactiveClass);
             buttonElement.disabled = false;
         }
+    }
+
+    // принудительное отключение кнопки после добавления карточки на страницу
+    inactiveButton(buttonElement) {
+        buttonElement.classList.add(this.buttonElementInactiveClass);
+        buttonElement.disabled = true;
     }
 
     // добавляет инпутам и кнопке формы нужные обработчики валидации

@@ -20,7 +20,9 @@ import {
     popupName,
     popupStatus,
     validationElement,
-    popupImg
+    popupImg,
+    templateCard,
+    savePopupBtn
 } from "../utils/constants.js"
 
 import "../../pages/index.css"
@@ -44,10 +46,20 @@ const popupFormEdit = new PopupWithForm ({
     submitCallback: () => {
 
         user.setUserInfo(popupFormEdit._getInputValues());
-        popupFormEdit.closePopup();
+        popupFormEdit.close();
     } 
 
 })
+
+// функция создания карточки
+const createCard = (name, link) => {
+    const card = new Card (name, link, `#${templateCard.id}`, () => {
+        photoCardPopup.open({name: name, link: link})
+    } )
+    const photo = card.createPhotoCard();
+    return photo;
+
+}
 
 // сохранение добавленной из попапа картинки на страницу
 const popupFormAdd = new PopupWithForm ({
@@ -56,18 +68,13 @@ const popupFormAdd = new PopupWithForm ({
         const title = item.title;
         const link = item.link;
 
-        const cardAdd = new Card (title, link, '#photo-card', () => {
-            photoCardPopup.activePopup({name: title, link: link})
-        });
-        const photo = cardAdd.createPhotoCard();
-        figures.prepend(photo);
+        cardList.addItem(createCard(title,link))
 
-        popupFormAdd.closePopup();
+        popupFormAdd.close();
 
         // принудительное отключение кнопки при создании карточки
-        const savePopupBtn = popupAdd.querySelector('.form__btn-save');
-        savePopupBtn.classList.add('form__btn-save_inactive');
-        savePopupBtn.disabled = true;
+        addFormValidator.inactiveButton(savePopupBtn)
+
     }
 })
 
@@ -76,39 +83,35 @@ popupFormAdd.setEventListeners();
 photoCardPopup.setEventListeners();
 popupFormEdit.setEventListeners()
 
+
 // добавление фотокарточек на страницу
-const addCards = new Section (
+const cardList = new Section (
     {
         items: initialCards,
         renderer: (item) => {
             const name = item.name;
             const link = item.link;
 
-            const card = new Card (name, link, '#photo-card', () => {
-                photoCardPopup.activePopup({name: name, link: link})
-            }  )
-            const photo = card.createPhotoCard()
-
-            addCards.addItem(photo)
+            cardList.addItem(createCard(name, link))
         }
 
     }, figures)
 
-addCards.renderItems();
+cardList.renderItems();
 
 
 // слушатель кнопки "edit"
 openEditPopupBtn.addEventListener('click', () => {
     editFormValidator.enableValidation()
 
-    popupFormEdit.activePopup()
+    popupFormEdit.open()
     popupName.value = user.getUserInfo().name;
     popupStatus.value = user.getUserInfo().status;
 });
 
 // слушатель кнопки "add"
 openAddPopupBtn.addEventListener('click', () => {
-    popupFormAdd.activePopup();
+    popupFormAdd.open();
  });
 
 

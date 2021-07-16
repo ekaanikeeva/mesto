@@ -8,11 +8,13 @@ export const openAddPopupBtn = profile.querySelector('.profile__add-btn');
 export const popupAdd = document.querySelector('.popup_type_add-card');
 export const popupImg = document.querySelector('.popup_type_photo');
 export const closePopupButtons = Array.from(popups.querySelectorAll('.popup__btn-close'));
+export const savePopupBtn = popupAdd.querySelector('.form__btn-save');
 
 export const popupImgPicture = popups.querySelector('.popup__img');
 export const popupImgName = popups.querySelector('.popup__name');
 export const profileName = document.querySelector('.profile__name');
 export const profileStatus = document.querySelector('.profile__status');
+export const templateCard = document.querySelector('#photo-card')
 
 // поиск форм и инпутов форм через "name"
 export const formEdit = document.forms.edit;
