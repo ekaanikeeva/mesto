@@ -42,7 +42,7 @@ const user = new UserInfo (profileName, profileStatus)
 
 // сохранение изменения данных пользователя
 const popupFormEdit = new PopupWithForm ({
-    popupSelector: popupEdit,
+    popupElement: popupEdit,
     submitCallback: () => {
 
         user.setUserInfo(popupFormEdit._getInputValues());
@@ -63,7 +63,7 @@ const createCard = (name, link) => {
 
 // сохранение добавленной из попапа картинки на страницу
 const popupFormAdd = new PopupWithForm ({
-    popupSelector: popupAdd,
+    popupElement: popupAdd,
     submitCallback: (item) => {
         const title = item.title;
         const link = item.link;
