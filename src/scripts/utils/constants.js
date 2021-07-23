@@ -14,6 +14,7 @@ export const popupImgPicture = popups.querySelector('.popup__img');
 export const popupImgName = popups.querySelector('.popup__name');
 export const profileName = document.querySelector('.profile__name');
 export const profileStatus = document.querySelector('.profile__status');
+export const profileAvatar = document.querySelector('.profile__avatar')
 export const templateCard = document.querySelector('#photo-card')
 
 // поиск форм и инпутов форм через "name"

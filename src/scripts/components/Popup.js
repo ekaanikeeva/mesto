@@ -23,9 +23,8 @@ export class Popup {
     // закрытие по Escape
     _handleEscClose (evt) {
         if (evt.key === "Escape") {
-            console.log('escape')
             this.close()
-        } else console.log("слушатель не снялся")
+        } 
     }
 
     setEventListeners () {
