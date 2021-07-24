@@ -34,6 +34,7 @@
 @import url(../blocks/figure/__pic/figure__pic.css);
 @import url(../blocks/figure/__name/figure__name.css);
 @import url(../blocks/figure/__like/figure__like.css);
+@import url(../blocks/figure/__like-counter/figure__like-counter.css);
 @import url(../blocks/figure/__basket/figure__basket.css);
 @import url(../blocks/figure/__like/_active/figure__like_active.css);
 @import url(../blocks/footer/footer.css);
