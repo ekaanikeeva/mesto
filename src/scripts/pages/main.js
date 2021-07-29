@@ -40,10 +40,10 @@ import { PopupWithDelete } from "../components/PopupWithDelete.js";
 // включение валидации форм
 const editFormValidator = new FormValidator (formEdit, validationElement);
 const addFormValidator = new FormValidator (formAdd, validationElement);
-// const changeAvatarFormValidator = new FormValidator (formAvatar, validationElement)
+const changeAvatarFormValidator = new FormValidator (formAvatar, validationElement);
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
-// changeAvatarFormValidator.enableValidation();
+changeAvatarFormValidator.enableValidation();
 
 
 
@@ -205,7 +205,6 @@ const popupFormAdd = new PopupWithForm ({
         api.addCard(item)
         .then(()=> {
             cardsArray[0] = item;
-            
             let name = item.title;
             let link = item.link;
             let likes = []
@@ -224,6 +223,7 @@ const popupFormAdd = new PopupWithForm ({
 
     }
 })
+
 
 // включение слушателей попапов
 popupFormAdd.setEventListeners();
@@ -249,7 +249,6 @@ openAddPopupBtn.addEventListener('click', () => {
  });
 
  changeAvatarBtn.addEventListener('click', () => {
-    //  changeAvatarFormValidator.enableValidation();
      popupFormChangeAvatar.open()
      savePopupBtn.textContent = 'Сохранить'
  })

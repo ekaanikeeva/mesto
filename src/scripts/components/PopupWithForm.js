@@ -14,7 +14,6 @@ export class PopupWithForm extends Popup {
         this._inputList = this._formElement.querySelectorAll('.form__info')
         this.inputValue = {}
         this._inputList.forEach(inputElement => {
-
             this.inputValue[inputElement.name] = inputElement.value;
         });
         
@@ -26,7 +25,7 @@ export class PopupWithForm extends Popup {
 
         this._formElement.addEventListener('submit', (evt) => {
             evt.preventDefault();
-
+            
             this._submitCallback(this._getInputValues ())
         })
     }

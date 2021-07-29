@@ -62,19 +62,21 @@ export class Card {
         
     }
 
+
     setLike(likes) {
-        this.isLiked =likes.filter((item) => {return item._id == this.userId}).length > 0;
+            this.isLiked =likes.filter((item) => {return item._id == this.userId}).length > 0;
 
         
-        if (this.isLiked) this._activeLike();
-        else this._removeLike();
+            if (this.isLiked) this._activeLike();
+            else this._removeLike();
+    
+            this._element.querySelector('.figure__like-counter').textContent = likes.length;
+    
+            if (likes.length === 0) {
+                this._element.querySelector('.figure__like-counter').textContent = "";
+            }
+            return this.isLiked
 
-        this._element.querySelector('.figure__like-counter').textContent = likes.length;
-
-        if (likes.length === 0) {
-            this._element.querySelector('.figure__like-counter').textContent = "";
-        }
-        return this.isLiked
     }
 
     // устанавливает слушатели событий
