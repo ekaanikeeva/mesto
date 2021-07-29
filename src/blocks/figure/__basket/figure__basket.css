@@ -16,6 +16,7 @@
     grid-row: 1 / 2;
     transition: opacity 1s ease;
     z-index: 1;
+    visibility: visible;
 }
 
 .figure__basket:hover {

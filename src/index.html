@@ -17,11 +17,12 @@
     <main class="content">
 
         <section class="profile">
-            <img class="profile__avatar" src="<%=require('./images/Avatar.jpg')%>" alt="Аватар профиля">
+            <button type="button" class="profile__change-avatar-btn"></button>
+            <img class="profile__avatar" src="" alt="Аватар профиля">
 
             <div class="profile__info">
-                <h1 id='profile-name' class="profile__name">Жак-Ив Кусто</h1>
-                <p id='profile-status' class="profile__status">Исследователь океана</p>
+                <h1 id='profile-name' class="profile__name"></h1>
+                <p id='profile-status' class="profile__status"></p>
             </div>
 
             <button type="button" class="profile__edit-btn"></button>
@@ -72,6 +73,20 @@
             </div>
         </section>
 
+        <section class="popup popup_type_change-avatar">
+            <div class="popup__container">
+                <button type="button" class="popup__btn-close" aria-label="Закрыть" title='Закрыть'></button>
+
+                <form action="#" name="avatar" class="form form_avatar">
+                    <h2 class="form__title">Обновить аватар</h2>
+                    <input type="url" name="link" class="form__info form__info_link form__info_avatar" placeholder="Ссылка на картинку"
+                        id="input-link" required>
+                    <span class="input-link-error form__input-error"></span>
+                    <button type="submit" class="form__btn-save">Сохранить</button>
+                </form>
+            </div>
+        </section>
+
         <section class="popup popup_type_photo">
             <div class="popup__container-photo">
                 <button type="button" class="popup__btn-close" aria-label="Закрыть" title='Закрыть'></button>
@@ -79,14 +94,28 @@
                 <h2 class="popup__name"></h2>
             </div>
         </section>
+
+        <section class="popup popup_type_delete-card">
+            <div class="popup__container">
+                <button type="button" class="popup__btn-close" aria-label="Закрыть" title='Закрыть'></button>
+
+                <form action="#" name="delete" class="form" novalidate>
+                    <h2 class="form__title">Вы уверены?</h2>
+                
+                    <button type="submit" class="form__btn-save">Да</button>
+                </form>
+            </div>
+        </section>
+
     </div>
+
 
     <template id="photo-card">
         <li class="figure">
             <img class="figure__pic figure__pic-btn" src="#">
             <button type="button" class="figure__basket"></button>
             <h2 class="figure__name"></h2>
-            <button type="button" class="figure__like"><p class="figure__like-counter">1</p></button>
+            <button type="button" class="figure__like"><p class="figure__like-counter"></p></button>
         </li>
     </template>
 

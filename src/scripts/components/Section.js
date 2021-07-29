@@ -11,6 +11,10 @@ export class Section {
         this._container.append(element)
     }
 
+    addCard (element) {
+        this._container.prepend(element)
+    }
+
     // отвечает за отрисовку всех элементов
     renderItems () {
         this._items.forEach( itemsElement => {
