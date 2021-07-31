@@ -82,41 +82,6 @@ export class Api {
     }
 
 
-    // changeLikeCardStatus(cardId, cardIsLiked) {
-    //     if (cardIsLiked) {
-    //         console.log(cardIsLiked)
-    //         return fetch(`${this.baseUrl}/cards/likes/${cardId}`, {
-    //             method: 'DELETE',
-    //             headers: this.headers
-    //             })
-    //             .then(res => {
-    //                 if (res.ok) return res.json();
-    //                 else return Promise.reject(res.status);
-    //               })
-                  
-                  
-    //               .catch((err) => {
-    //                 console.log(`Лайк не удалился${err}`)
-    //               })   
-    //     } else {
-    //         console.log(cardIsLiked)
-    //         return fetch(`${this.baseUrl}/cards/likes/${cardId}`, {
-    //             method: 'DELETE',
-    //             headers: this.headers
-    //             })
-    //             .then(res => {
-    //                 if (res.ok) return res.json();
-    //                 else return Promise.reject(res.status);
-    //               })
-                  
-                  
-    //               .catch((err) => {
-    //                   console.log(`Лайк не удалось поставить${err}`)
-    //               })   
-    //     }
-        
-    // }
-
     // отправить лайк карточки на сервер
     postLike (cardId) {
         return fetch(`${this.baseUrl}/cards/likes/${cardId}`, {

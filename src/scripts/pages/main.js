@@ -55,6 +55,11 @@ const api = new Api ({
     }
 })
 
+
+    
+
+// setDeleteListeners
+
 // функция создания карточки
 const createCard = (name, link, owner, id, likes, userId) => {
 
@@ -66,12 +71,13 @@ const createCard = (name, link, owner, id, likes, userId) => {
 
     // лайк 
     (state) => { 
-
+console.log(state)
     if (state == true) {
         api.deleteLike(id)
         .then((data) => {
             console.log(data)
             return card.setLike(data.likes)
+            
         }) 
     } else if (state == false) {
         api.postLike(id)
@@ -84,27 +90,27 @@ const createCard = (name, link, owner, id, likes, userId) => {
     
 },
     // удаление карточки
-    () => {
-        const popupFormDelete = new PopupWithDelete ({
-            popupElement: popupDelete,
-            submitCallback: (id) => {
-                api.deleteCard(id)
-                .then(() => {
-                    return card._deletePhotoElement()
-                })
-                popupFormDelete.close()
-            }
-        })
-        popupFormDelete.open()
-        popupFormDelete.setEventListeners(id);
+    (id) => {
         
-    })
+        popupFormDelete.open()
+        popupFormDelete.setEventListeners(id)    
 
+        popupFormDelete.setSubmit(() => {
+            api.deleteCard(id)
+            .then(() => {               
+                card._deletePhotoElement();     
+            })
+            savePopupBtn.textContent = 'Сохранение...'
+            popupFormDelete.close()
+    })
+})
+    
     const photo = card.createPhotoCard(userId);
     return photo;
 
 }
 
+const popupFormDelete = new PopupWithDelete (popupDelete)
 
 
 //  информация пользователя
@@ -203,14 +209,15 @@ const popupFormAdd = new PopupWithForm ({
     popupElement: popupAdd,
     submitCallback: (item) => {
         api.addCard(item)
-        .then(()=> {
-            cardsArray[0] = item;
-            let name = item.title;
-            let link = item.link;
-            let likes = []
-            let owner = {name: user.userName, _id: user.id}
-            console.log(user.id)
-            cardList.addCard(createCard(name, link, owner, undefined, likes, user.id))
+        .then((res)=> {
+            console.log(res)
+            let name = res.name;
+            let link = res.link;
+            let id = res._id;
+            let owner = res.owner;
+            let likes = res.likes;
+
+            cardList.addCard(createCard(name, link, owner, id, likes, user.id))
         }
         
         )

@@ -13,9 +13,7 @@ export class Card {
         this.likes = data.likes;
         this.creatorId = data.owner._id;
         this.userId = userId;
-        // this.isLiked = this.isLiked.bind(this)
 
-        
         this._activeLike = this._activeLike.bind(this)
         this._removeLike = this._removeLike.bind(this)
         this._deletePhotoElement = this._deletePhotoElement.bind(this)
@@ -63,6 +61,7 @@ export class Card {
     }
 
 
+
     setLike(likes) {
             this.isLiked =likes.filter((item) => {return item._id == this.userId}).length > 0;
 
@@ -79,17 +78,20 @@ export class Card {
 
     }
 
+
     // устанавливает слушатели событий
     _setEventListeners () {
-        
-        this._element.querySelector('.figure__like').addEventListener('click', () => {
-
-            this.handleLikeClick(this.setLike(this.likes));
+      
+        this._element.querySelector('.figure__like').addEventListener('click', (evt) => {
+            
+            if(evt.target.classList.contains('figure__like_active')) this.handleLikeClick(true);
+            else this.handleLikeClick(false);
         });
+
 
         this._element.querySelector('.figure__basket').addEventListener('click', () => {
 
-            this.handleDeleteIconClick()
+            this.handleDeleteIconClick(this.id)
         });
         // открывает попап с фотографией
 
