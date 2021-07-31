@@ -8,7 +8,7 @@
     background-size: 100%;
     background-image: url('../../../images/like.svg');
     background-repeat: no-repeat;
-    transition: opacity 1s ease;
+    transition: opacity 0.3s ease;
     padding: 0;
     border: none;
     font: inherit;

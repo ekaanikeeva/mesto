@@ -1,12 +1,12 @@
 
-import { Card } from "../components/Card.js";
-import { FormValidator } from "../utils/FormValidator.js";
-import { initialCards } from "../utils/initial-cards.js";
-import { Section } from "../components/Section.js";
-import { PopupWithImage } from "../components/PopupWithImage.js"
-import { PopupWithForm } from "../components/PopupWithForm.js";
-import { UserInfo } from "../components/UserInfo.js";
-import { Api } from "../utils/api.js";
+import { Card } from "../scripts/components/Card.js";
+import { FormValidator } from "../scripts/components/FormValidator.js";
+import { initialCards } from "../scripts/utils/initial-cards.js";
+import { Section } from "../scripts/components/Section.js";
+import { PopupWithImage } from "../scripts/components/PopupWithImage.js"
+import { PopupWithForm } from "../scripts/components/PopupWithForm.js";
+import { UserInfo } from "../scripts/components/UserInfo.js";
+import { Api } from "../scripts/components/Api.js";
 
 import { 
     figures,
@@ -29,11 +29,10 @@ import {
     savePopupBtn,
     formAvatar,
     changeAvatarBtn
-} from "../utils/constants.js"
+} from "../scripts/utils/constants.js"
 
-import "../../pages/index.css"
-import { PopupWithDelete } from "../components/PopupWithDelete.js";
-
+import "../pages/index.css"
+import { PopupWithDelete } from "../scripts/components/PopupWithDelete.js";
 
 
 
@@ -71,18 +70,18 @@ const createCard = (name, link, owner, id, likes, userId) => {
 
     // лайк 
     (state) => { 
-console.log(state)
+
     if (state == true) {
         api.deleteLike(id)
         .then((data) => {
-            console.log(data)
+
             return card.setLike(data.likes)
             
         }) 
     } else if (state == false) {
         api.postLike(id)
         .then((data) => {
-            console.log(data)
+
             return card.setLike(data.likes)
     })
     
@@ -96,10 +95,12 @@ console.log(state)
         popupFormDelete.setEventListeners(id)    
 
         popupFormDelete.setSubmit(() => {
-            api.deleteCard(id)
-            .then(() => {               
+                api.deleteCard(id)
+                .then(() => {               
                 card._deletePhotoElement();     
             })
+
+            
             savePopupBtn.textContent = 'Сохранение...'
             popupFormDelete.close()
     })
@@ -131,7 +132,7 @@ api.getInitialCards()
         
     })
     // // добавление фотокарточек на страницу
-    .finally(() => {
+    .then(() => {
         
         cardList = new Section (
             {
