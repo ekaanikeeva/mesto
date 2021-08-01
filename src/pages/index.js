@@ -131,58 +131,46 @@ const user = new UserInfo (profileName, profileStatus, profileAvatar)
 let cardsArray = [];
 let cardList = null;
 
-api.getInitialCards()
-    .then((result) => {
-        console.log(`Информация о пользователе получена с сервера.`);
-        // заполняем массив полученными с сервера карточками
-        cardsArray = result.map((item) => {
-            return item;
-        })
 
-        return cardsArray
-        
-    })
-    // // добавление фотокарточек на страницу
-    .then(() => {
-        
-        cardList = new Section (
-            {
-                items: cardsArray,
-                renderer: (item) => {
-                    const name = item.name;
-                    const link = item.link;
-                    const id = item._id;
-                    const likes = item.likes;
-                    const owner = item.owner;
-                    const userId = user.id;
-                    cardList.addItem(createCard(name, link, owner, id, likes, userId))
+// Промисы добавления карточек на страницу и данных пользователя
+Promise.all([api.getInitialCards(), api.getUserInfo()])
+.then(([cards, res]) => {
+    console.log(`Информация о пользователе получена с сервера.`);
 
-                }
-                
-            }, figures)
-        console.log(cardsArray)
-        cardList.renderItems();
-
-    })
-    .catch((err) => {
-        console.log(`Не удалось загрузить карточки ${err}`)
-    }) 
-
-    api.getUserInfo()
-    .then((res) => {
-        console.log(res)
-        const name= res.name;
+    const name= res.name;
         const status = res.about;
         const avatar = res.avatar;
         const userId = res._id
         user.setUserInfo({name, status});
         user.setUserAvatar(avatar);
         user.setUserId(userId);
-        
+
+    cardsArray = cards.map((item) => {
+        return item;
     })
-    .catch((err) => {
-        console.log(`Не удалось получить информацию о  пользователе ${err}`)
-    }) 
+
+    cardList = new Section (
+        {
+            items: cardsArray,
+            renderer: (item) => {
+                const name = item.name;
+                const link = item.link;
+                const id = item._id;
+                const likes = item.likes;
+                const owner = item.owner;
+                const profileId = res._id;
+                
+                cardList.addItem(createCard(name, link, owner, id, likes, profileId))
+
+            }
+            
+        }, figures)
+    console.log(cardsArray)
+    cardList.renderItems();
+})
+.catch((err) => {
+    console.log(`Не удалось загрузить информацию с сервера ${err}`)
+}) 
 
 
 // попап открытия фото

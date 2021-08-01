@@ -65,9 +65,9 @@ export class Card {
 
 
     setLike(likes) {
-            this.isLiked =likes.filter((item) => {return item._id == this._userId}).length > 0;
+            this.isLiked =likes.filter((item) => { return item._id === this._userId }).length > 0;
 
-        
+            
             if (this.isLiked) this._activeLike();
             else this._removeLike();
     
