@@ -1,10 +1,8 @@
-// import { profileAvatar } from "../utils/constants";
-
 export class UserInfo {
     constructor (userName, userStatus, userAvatar, id) {
-        this.userName = userName;
-        this.userStatus = userStatus;
-        this.profileAvatar = userAvatar;
+        this._userName = userName;
+        this._userStatus = userStatus;
+        this._profileAvatar = userAvatar;
         this.id = id;
 
     }
@@ -12,20 +10,20 @@ export class UserInfo {
     // данные для отображения в попапе
     getUserInfo () {
         const userInfo = {
-            name: this.userName.textContent,
-            status: this.userStatus.textContent
+            name: this._userName.textContent,
+            status: this._userStatus.textContent
         }
         return userInfo;
     }
 
     // данные для отправки на страницу
     setUserInfo ({name, status}) {
-        this.userName.textContent = name;
-        this.userStatus.textContent = status;
+        this._userName.textContent = name;
+        this._userStatus.textContent = status;
     }
 
     setUserAvatar (avatar) {
-        this.profileAvatar.src = avatar;
+        this._profileAvatar.src = avatar;
     }
 
     setUserId (id) {

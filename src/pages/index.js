@@ -115,7 +115,6 @@ const createCard = (name, link, owner, id, likes, userId) => {
                 })       
     })
 } })
-    
     const photo = card.createPhotoCard(userId);
     return photo;
 
@@ -180,11 +179,11 @@ const photoCardPopup = new PopupWithImage (popupImg)
 // сохранение изменения данных пользователя
 const popupFormEdit = new PopupWithForm ({
     popupElement: popupEdit,
-    submitCallback: () => {
-        api.setUserInform(popupFormEdit._getInputValues())
+    submitCallback: (inputValues) => {
+        api.setUserInform(inputValues)
         .then((res) => {
-            let name = res.name
-            let status = res.about
+            const name = res.name
+            const status = res.about
             user.setUserInfo({name, status});
             
             changeButtonTextcontent(popupFormEdit.buttonSubmit)
@@ -201,13 +200,12 @@ const popupFormEdit = new PopupWithForm ({
 
 const popupFormChangeAvatar = new PopupWithForm ({
     popupElement: popupChangeAvatar,
-    submitCallback: () => {
+    submitCallback: (inputAvatar) => {
+        const avatarLink = inputAvatar.link
 
-        const avatarLink = popupFormChangeAvatar._getInputValues()
-
-        api.changeAvatar(avatarLink.link)
+        api.changeAvatar(avatarLink)
         .then(() => {
-            user.setUserAvatar(avatarLink.link)
+            user.setUserAvatar(avatarLink)
 
             changeButtonTextcontent(popupFormChangeAvatar.buttonSubmit)
             popupFormChangeAvatar.close()
