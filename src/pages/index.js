@@ -103,11 +103,12 @@ const createCard = (name, link, owner, id, likes, userId) => {
         popupFormDelete.open(id)
 
         popupFormDelete.setSubmit(() => {
+                popupFormDelete.buttonSubmit.textContent = 'Удаление...';
+
                 api.deleteCard(id)
                 .then(() => {               
                 card.deletePhotoElement(); 
                 
-                popupFormDelete.buttonSubmit.textContent = 'Удаление...'
                 popupFormDelete.close()  
             })
                 .catch((err) => {
@@ -180,13 +181,13 @@ const photoCardPopup = new PopupWithImage (popupImg)
 const popupFormEdit = new PopupWithForm ({
     popupElement: popupEdit,
     submitCallback: (inputValues) => {
+        changeButtonTextcontent(popupFormEdit.buttonSubmit);
         api.setUserInform(inputValues)
         .then((res) => {
             const name = res.name
             const status = res.about
             user.setUserInfo({name, status});
             
-            changeButtonTextcontent(popupFormEdit.buttonSubmit)
             popupFormEdit.close();
         })
         .catch((err) => {
@@ -203,11 +204,10 @@ const popupFormChangeAvatar = new PopupWithForm ({
     submitCallback: (inputAvatar) => {
         const avatarLink = inputAvatar.link
 
+        changeButtonTextcontent(popupFormChangeAvatar.buttonSubmit)
         api.changeAvatar(avatarLink)
         .then(() => {
             user.setUserAvatar(avatarLink)
-
-            changeButtonTextcontent(popupFormChangeAvatar.buttonSubmit)
             popupFormChangeAvatar.close()
         })
         .catch((err) => {
@@ -222,18 +222,18 @@ const popupFormChangeAvatar = new PopupWithForm ({
 const popupFormAdd = new PopupWithForm ({
     popupElement: popupAdd,
     submitCallback: (item) => {
+        changeButtonTextcontent(popupFormAdd.buttonSubmit)
         api.addCard(item)
         .then((res)=> {
             console.log(res)
-            let name = res.name;
-            let link = res.link;
-            let id = res._id;
-            let owner = res.owner;
-            let likes = res.likes;
+            const name = res.name;
+            const link = res.link;
+            const id = res._id;
+            const owner = res.owner;
+            const likes = res.likes;
 
             cardList.addCard(createCard(name, link, owner, id, likes, user.id))
 
-            changeButtonTextcontent(popupFormAdd.buttonSubmit)
             popupFormAdd.close();
         })
         .catch((err) => {
