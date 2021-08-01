@@ -28,7 +28,8 @@ import {
     templateCard,
     savePopupBtn,
     formAvatar,
-    changeAvatarBtn
+    changeAvatarBtn,
+    popups
 } from "../scripts/utils/constants.js"
 
 import "../pages/index.css"
@@ -54,22 +55,22 @@ const api = new Api ({
     }
 })
 
-
-    
-
-// setDeleteListeners
+const changeButtonTextcontent = (btn) => {
+    btn.textContent = 'Сохранение...'
+}
 
 // функция создания карточки
 const createCard = (name, link, owner, id, likes, userId) => {
 
-    const card = new Card ({name, link, id, likes, owner}, userId, `#${templateCard.id}`, 
+    const card = new Card ({data: {name: name, link: link, id: id, likes: likes, owner: owner}, 
+        userId: userId, cardSelector: `#${templateCard.id}`, 
     // открытие попапа с картинкой
-    () => {
+    handleCardClick: () => {
         photoCardPopup.open({name: name, link: link})
     },
 
     // лайк 
-    (state) => { 
+    handleLikeClick: (state) => { 
 
     if (state == true) {
         api.deleteLike(id)
@@ -77,34 +78,43 @@ const createCard = (name, link, owner, id, likes, userId) => {
 
             return card.setLike(data.likes)
             
-        }) 
+        })
+        .catch((err) => {
+            console.log(`Лайк не удален ${err}`)
+        })   
     } else if (state == false) {
         api.postLike(id)
         .then((data) => {
-
+            
             return card.setLike(data.likes)
+
     })
+        .catch((err) => {
+            console.log(`Не удалось поставить лайк ${err}`)
+        }) 
     
     } else console.log('проблема с лайком') 
     
 },
     // удаление карточки
-    (id) => {
+    handleDeleteIconClick: (id) => {
         
-        popupFormDelete.open()
-        popupFormDelete.setEventListeners(id)    
+        popupFormDelete.buttonSubmit.textContent = 'Да'
+        popupFormDelete.open(id)
 
         popupFormDelete.setSubmit(() => {
                 api.deleteCard(id)
                 .then(() => {               
-                card._deletePhotoElement();     
+                card.deletePhotoElement(); 
+                
+                popupFormDelete.buttonSubmit.textContent = 'Удаление...'
+                popupFormDelete.close()  
             })
-
-            
-            savePopupBtn.textContent = 'Сохранение...'
-            popupFormDelete.close()
+                .catch((err) => {
+                    console.log(`Не удалось удалить карточку ${err}`)
+                })       
     })
-})
+} })
     
     const photo = card.createPhotoCard(userId);
     return photo;
@@ -112,6 +122,7 @@ const createCard = (name, link, owner, id, likes, userId) => {
 }
 
 const popupFormDelete = new PopupWithDelete (popupDelete)
+popupFormDelete.setEventListeners()    
 
 
 //  информация пользователя
@@ -153,19 +164,25 @@ api.getInitialCards()
         cardList.renderItems();
 
     })
+    .catch((err) => {
+        console.log(`Не удалось загрузить карточки ${err}`)
+    }) 
 
-api.getUserInfo()
-.then((res) => {
-    console.log(res)
-    const name= res.name;
-    const status = res.about;
-    const avatar = res.avatar;
-    const userId = res._id
-    user.setUserInfo({name, status});
-    user.setUserAvatar(avatar);
-    user.setUserId(userId);
-    
-})
+    api.getUserInfo()
+    .then((res) => {
+        console.log(res)
+        const name= res.name;
+        const status = res.about;
+        const avatar = res.avatar;
+        const userId = res._id
+        user.setUserInfo({name, status});
+        user.setUserAvatar(avatar);
+        user.setUserId(userId);
+        
+    })
+    .catch((err) => {
+        console.log(`Не удалось получить информацию о  пользователе ${err}`)
+    }) 
 
 
 // попап открытия фото
@@ -181,9 +198,14 @@ const popupFormEdit = new PopupWithForm ({
             let name = res.name
             let status = res.about
             user.setUserInfo({name, status});
+            
+            changeButtonTextcontent(popupFormEdit.buttonSubmit)
+            popupFormEdit.close();
         })
-        savePopupBtn.textContent = 'Сохранение...'
-        popupFormEdit.close();
+        .catch((err) => {
+            console.log(`Не удалось обновить данные пользователя ${err}`)
+        }) 
+        
     } 
 
 })
@@ -198,9 +220,14 @@ const popupFormChangeAvatar = new PopupWithForm ({
         api.changeAvatar(avatarLink.link)
         .then(() => {
             user.setUserAvatar(avatarLink.link)
+
+            changeButtonTextcontent(popupFormChangeAvatar.buttonSubmit)
+            popupFormChangeAvatar.close()
         })
-        savePopupBtn.textContent = 'Сохранение...'
-        popupFormChangeAvatar.close()
+        .catch((err) => {
+            console.log(`Не удалось сменить аватар пользователя ${err}`)
+        }) 
+        
         
     }
 })
@@ -219,15 +246,18 @@ const popupFormAdd = new PopupWithForm ({
             let likes = res.likes;
 
             cardList.addCard(createCard(name, link, owner, id, likes, user.id))
-        }
+
+            changeButtonTextcontent(popupFormAdd.buttonSubmit)
+            popupFormAdd.close();
+        })
+        .catch((err) => {
+            console.log(`Не удалось добавить картинку на страницу ${err}`)
+        }) 
         
-        )
-        
-        savePopupBtn.textContent = 'Сохранение...'
-        popupFormAdd.close();
+        // savePopupBtn.textContent = 'Сохранение...'
 
         // принудительное отключение кнопки при создании карточки
-        addFormValidator.inactiveButton(savePopupBtn)
+        // addFormValidator.inactiveButton()
 
     }
 })
@@ -242,23 +272,23 @@ popupFormChangeAvatar.setEventListeners();
 
 // слушатель кнопки "edit"
 openEditPopupBtn.addEventListener('click', () => {
-    editFormValidator.enableValidation()
 
     popupFormEdit.open()
     popupName.value = user.getUserInfo().name;
     popupStatus.value = user.getUserInfo().status;
-    savePopupBtn.textContent = 'Сохранить'
+    popupFormEdit.buttonSubmit.textContent = 'Сохранить'
+    
 });
 
 // слушатель кнопки "add"
 openAddPopupBtn.addEventListener('click', () => {
     popupFormAdd.open();
-    savePopupBtn.textContent = 'Создать'
+    popupFormAdd.buttonSubmit.textContent = 'Создать'
  });
 
  changeAvatarBtn.addEventListener('click', () => {
      popupFormChangeAvatar.open()
-     savePopupBtn.textContent = 'Сохранить'
+     popupFormChangeAvatar.buttonSubmit.textContent = 'Сохранить'
  })
 
 

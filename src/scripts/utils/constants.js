@@ -20,6 +20,8 @@ export const profileAvatar = document.querySelector('.profile__avatar')
 export const templateCard = document.querySelector('#photo-card')
 export const basketBtn = document.querySelector('figure__basket')
 
+
+
 // поиск форм и инпутов форм через "name"
 export const formEdit = document.forms.edit;
 export const formAdd = document.forms.add;

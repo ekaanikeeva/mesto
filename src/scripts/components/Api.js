@@ -8,19 +8,17 @@ export class Api {
         this.cardId = this.cardId;
     }
 
+    _checkResponse (res) {
+            if (res.ok) return res.json();
+            else return Promise.reject(res.status);
+    }
+
     // получение карточек с сервера
     getInitialCards () {
         return fetch(`${this.baseUrl}/cards`, {
             method: 'GET',
             headers: this.headers })
-            .then(res => {
-                if (res.ok) return res.json();
-                else return Promise.reject(res.status);
-              })
-              
-              .catch((err) => {
-                  console.log(err)
-              })   
+            .then(this._checkResponse) 
 }
 
     // получить информацию пользователя с сервера
@@ -28,19 +26,11 @@ export class Api {
         return fetch(`${this.baseUrl}/users/me `, {
             method: 'GET',
             headers: this.headers })
-            .then(res => {
-                if (res.ok) return res.json();
-                else return Promise.reject(res.status);
-              })
-
-              .catch((err) => {
-                  console.log(err)
-              })    
+            .then(this._checkResponse)
     }
 
     //отправить новую информацию пользователя
     setUserInform (item) {
-        {
             return fetch(`${this.baseUrl}/users/me `, {
                 method: 'PATCH',
                 headers: this.headers,
@@ -49,15 +39,7 @@ export class Api {
                     about: item.status
                   })
                 })
-                .then(res => {
-                    if (res.ok) return res.json();
-                    else return Promise.reject(res.status);
-                  })
-    
-                  .catch((err) => {
-                      console.log(err)
-                  })    
-        }
+                .then(this._checkResponse) 
     }
 
     // отправить добавленную карточку на сервер
@@ -71,14 +53,7 @@ export class Api {
                 link: item.link
               }) 
             })
-            .then(res => {
-                if (res.ok) return res.json();
-                else return Promise.reject(res.status);
-              })
-
-              .catch((err) => {
-                  console.log(err)
-              })   
+            .then(this._checkResponse)
     }
 
 
@@ -88,15 +63,7 @@ export class Api {
             method: 'PUT',
             headers: this.headers
             })
-            .then(res => {
-                if (res.ok) return res.json();
-                else return Promise.reject(res.status);
-              })
-              
-              
-              .catch((err) => {
-                  console.log(err)
-              })   
+            .then(this._checkResponse)       
     }
 
       // удалить лайк карточки с сервера
@@ -105,15 +72,7 @@ export class Api {
             method: 'DELETE',
             headers: this.headers
             })
-            .then(res => {
-                if (res.ok) return res.json();
-                else return Promise.reject(res.status);
-              })
-              
-              
-              .catch((err) => {
-                  console.log(err)
-              })   
+            .then(this._checkResponse)         
     }
 
     // удалить карточку с сервера
@@ -122,13 +81,7 @@ export class Api {
             method: 'DELETE',
             headers: this.headers
         })
-        .then(res => {
-            if (res.ok) return res.json();
-            else return Promise.reject(res.status);
-        })
-        .catch((err) => {
-            console.log(err)
-        }) 
+        .then(this._checkResponse)
     }  
 
     // сменить аватар
@@ -138,12 +91,6 @@ export class Api {
             headers: this.headers,
             body: JSON.stringify({avatar: link}) 
         })
-        .then(res => {
-            if (res.ok) return res.json();
-            else return Promise.reject(res.status);
-        })
-        .catch((err) => {
-            console.log(err)
-        }) 
+        .then(this._checkResponse)
     }
 }

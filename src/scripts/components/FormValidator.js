@@ -1,50 +1,50 @@
 
 export class FormValidator {
     constructor (formElement, validationElement) {
-        this.formElement = formElement;
-        this.formSelector = validationElement.formSelector;
-        this.inputSelector = validationElement.inputSelector;
-        this.buttonElement = validationElement.buttonSelector;
-        this.buttonElementInactiveClass = validationElement.inactiveButtonClass
-        this.inputErrorClass = validationElement.inputErrorClass;
-        this.errorClass = validationElement.errorClass;
+        this._formElement = formElement;
+        this._formSelector = validationElement.formSelector;
+        this._inputSelector = validationElement.inputSelector;
+        this._buttonElement = validationElement.buttonSelector;
+        this._buttonElementInactiveClass = validationElement.inactiveButtonClass
+        this._inputErrorClass = validationElement.inputErrorClass;
+        this._errorClass = validationElement.errorClass;
 
     }
 
     // добавляет класс с ошибкой
-    __showInputError (inputElement, errorMessage) {
+    _showInputError (inputElement, errorMessage) {
         
-        const errorElement = this.formElement.querySelector(`.${inputElement.id}-error`);
-        inputElement.classList.add(this.inputErrorClass)
+        const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
+        inputElement.classList.add(this._inputErrorClass)
         errorElement.textContent = errorMessage;
-        errorElement.classList.add(this.errorClass);
+        errorElement.classList.add(this._errorClass);
     }
 
     // убирает класс с ошибкой
-    __removeInputError (inputElement) {
+    _removeInputError (inputElement) {
     
-        const errorElement = this.formElement.querySelector(`.${inputElement.id}-error`);
-        inputElement.classList.remove(this.inputErrorClass)
+        const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
+        inputElement.classList.remove(this._inputErrorClass)
         errorElement.textContent = '';
-        errorElement.classList.remove(this.errorClass);
+        errorElement.classList.remove(this._errorClass);
     }
     
 
     
     // проверяет валидность инпута
-    __inputValidity (inputElement) {
+    _inputValidity (inputElement) {
          
         if (!inputElement.validity.valid) {
             
-            this.__showInputError (inputElement, inputElement.validationMessage);
+            this._showInputError (inputElement, inputElement.validationMessage);
         } else {
-            this.__removeInputError(inputElement);
+            this._removeInputError(inputElement);
         }
     }
 
     
     // возвращает true если валидация инпутов пройдена и false если нет
-    __hasInvalidInput (inputList) {
+    _hasInvalidInput (inputList) {
 
         return inputList.some((inputElement) => {
         return !inputElement.validity.valid;
@@ -53,59 +53,57 @@ export class FormValidator {
 }
 
     // функция для активации кнопки при валидных инпутах
-    __toggleBtnCondition (inputList, buttonElement) {
+    _toggleBtnCondition (inputList, buttonElement) {
         
         // Если есть хотя бы один невалидный инпут
-        if (this.__hasInvalidInput(inputList)) {
+        if (this._hasInvalidInput(inputList)) {
             // сделать неактивной
-            buttonElement.classList.add(this.buttonElementInactiveClass);
+            buttonElement.classList.add(this._buttonElementInactiveClass);
             buttonElement.disabled = true;
         } else {
             // иначе - активной
-            buttonElement.classList.remove(this.buttonElementInactiveClass);
+            buttonElement.classList.remove(this._buttonElementInactiveClass);
             buttonElement.disabled = false;
         }
     }
 
     // принудительное отключение кнопки после добавления карточки на страницу
     inactiveButton(buttonElement) {
-        buttonElement.classList.add(this.buttonElementInactiveClass);
+        buttonElement.classList.add(this._buttonElementInactiveClass);
         buttonElement.disabled = true;
     }
 
     // добавляет инпутам и кнопке формы нужные обработчики валидации
-    __setEventListeners () {
-        const inputList = Array.from(this.formElement.querySelectorAll(this.inputSelector));
-        const buttonElement = this.formElement.querySelector(this.buttonElement);
+    _setEventListeners () {
+        const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
+        const buttonElement = this._formElement.querySelector(this._buttonElement);
 
-        if (this.formElement.classList.contains('form_add-card'))
-        {
-            this.__toggleBtnCondition(inputList, buttonElement);
-        }
-        
         
         inputList.forEach((inputElement) => {
-            if(this.formElement.classList.contains('form_edit'))
-            {
-                this.__removeInputError (inputElement);
-                buttonElement.classList.remove(this.buttonElementInactiveClass);
-                buttonElement.disabled = false;
-            }
-            
             inputElement.addEventListener('input', () => {
 
-                this.__inputValidity(inputElement)
-                this.__toggleBtnCondition(inputList, buttonElement);
+                this._inputValidity(inputElement)
+                this._toggleBtnCondition(inputList, buttonElement);
             })
         })
+
+        
+        this._formElement.addEventListener('reset', () => {
+            this.inactiveButton(buttonElement)
+            
+            inputList.forEach((inputElement) => {
+                this._removeInputError(inputElement)  
+            })
+        });
+            
     }
 
     // включение валидации всех форм
     enableValidation ()  {
-        this.formElement.addEventListener('submit', (evt) => {
+        this._formElement.addEventListener('submit', (evt) => {
             evt.preventDefault();
         })
         
-        this.__setEventListeners();
+        this._setEventListeners();
     }
 }
