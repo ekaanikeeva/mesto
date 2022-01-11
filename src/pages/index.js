@@ -75,7 +75,6 @@ const createCard = (name, link, owner, id, likes, userId) => {
     if (state == true) {
         api.deleteLike(id)
         .then((data) => {
-
             return card.setLike(data.likes)
             
         })
@@ -136,7 +135,7 @@ let cardList = null;
 Promise.all([api.getInitialCards(), api.getUserInfo()])
 .then(([cards, res]) => {
     console.log(`Информация о пользователе получена с сервера.`);
-
+    console.log(res)
     const name= res.name;
         const status = res.about;
         const avatar = res.avatar;
